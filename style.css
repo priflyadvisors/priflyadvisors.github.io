@@ -50,6 +50,11 @@
   .actions{display:flex;gap:14px;flex-wrap:wrap}
   section{padding:96px 0}
   section.tight{padding:64px 0}
+  /* Ed, 2026-09-15: less white space in Speaking's Formats and Recent appearances */
+  section.tight .sec-head{margin-bottom:28px}
+  section.tight .cols2 > div{padding-top:24px;padding-bottom:24px}
+  section.tight .dates td{padding:12px 0}
+  @media (max-width:760px){section.tight{padding:44px 0}}
   .band{background:var(--mist)}
   .sec-head{display:grid;gap:16px;margin-bottom:48px;max-width:720px}
   .sec-head h2{font-size:clamp(30px,3.4vw,42px);line-height:1.15}}
@@ -127,10 +132,16 @@
   .prose{display:grid;gap:20px;max-width:64ch;font-size:17px;color:var(--ink-soft)}
 
   /* talk */
-  .talk{display:grid;grid-template-columns:220px 1fr;gap:40px;border-top:1px solid var(--ink);padding-top:36px}
-  .talk h3{font-size:clamp(32px,3.6vw,46px);line-height:1.08}
-  .talk .subt{font-family:var(--display);font-style:italic;font-size:22px;color:var(--gold);margin:10px 0 22px;line-height:1.35}
-  .talk p{max-width:62ch;color:var(--ink-soft);font-size:17px}
+  /* Ed, 2026-09-15: two signature talks side by side, each marked with its format and length */
+  .talks{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .talk p + p{margin-top:14px}
+  .kit.solo{display:block}   /* Ed, 2026-09-15: organiser section without the headshot */
+  .talk{border-top:1px solid var(--ink);padding-top:28px}
+  .talk .eyebrow{display:block;margin-bottom:14px}
+  .talk h3{font-size:clamp(30px,3vw,40px);line-height:1.08}
+  .talk .subt{font-family:var(--display);font-style:italic;font-size:20px;color:var(--gold);margin:10px 0 20px;line-height:1.35}
+  .talk p{color:var(--ink-soft);font-size:16.5px}
+  @media (max-width:900px){.talks{grid-template-columns:1fr;gap:48px}}
 
   .dates{width:100%;border-collapse:collapse;font-size:15px}
   .dates td{padding:18px 0;border-bottom:1px solid var(--line);vertical-align:baseline}

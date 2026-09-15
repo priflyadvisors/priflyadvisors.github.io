@@ -3,6 +3,12 @@ OUT = sys.argv[1]
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap">'
 BASE = "https://priflyadvisors.com/"
 BOOK = "contact.html?topic=coaching"   # → Cal.com once set up
+# Speaking enquiries (Ed, 2026-09-15): a pre-filled email, never a calendar, so Ed answers each date himself
+from urllib.parse import quote
+SPEAK_TO = "ed@priflyadvisors.com"   # → speaking@priflyadvisors.com once that alias exists
+SPEAK = f"mailto:{SPEAK_TO}?subject={quote('Speaking enquiry: [your event]')}&amp;body=" + quote(
+    "Hi Ed,\r\n\r\nWe'd like to talk to you about speaking at our event.\r\n\r\nEvent:\r\nDate(s) we have in mind:\r\n"
+    "Location:\r\nAudience (who, and roughly how many):\r\nFormat (keynote, fireside, panel, working session):\r\nAnything else:\r\n")
 TOMCAT = os.path.exists(os.path.join(OUT, "images", "tomcat.png"))
 
 def nav(active):
@@ -53,8 +59,9 @@ def phead(crumb, eyebrow, h1, lede, button=None, img=None):
         return f'<div class="phead"><div class="wrap phead-grid"><div class="phead-text">{text}</div>{fig}</div></div>'
     return f'<div class="phead"><div class="wrap">{text}</div></div>'
 
-def sec(title, inner, band=False):
-    return f'<section{" class=\"band\"" if band else ""}><div class="wrap"><div class="sec-head"><h2>{title}</h2></div>{inner}</div></section>'
+def sec(title, inner, band=False, tight=False):
+    cls = " ".join(c for c, on in (("band", band), ("tight", tight)) if on)
+    return f'<section{f" class=\"{cls}\"" if cls else ""}><div class="wrap"><div class="sec-head"><h2>{title}</h2></div>{inner}</div></section>'
 
 # Photo row (Ed, review 1): mostly wordless images with short captions, replacing the credentials strip.
 # Real photos go in images/photo-1.jpg … photo-3.jpg; until then placeholders show in the preview only
@@ -187,25 +194,39 @@ coaching = (phead("Coaching", "Executive Coaching &amp; Leadership Advisory", "H
             + cta2("Start with a conversation", BOOK))
 
 # ---------- SPEAKING ----------
-speaking = phead("Speaking", "Speaking", "Crisis judgement <em>and leadership under pressure</em>",
-                 "TOPGUN-inspired keynotes on crisis judgement and leadership under pressure, and working sessions on building the leadership system your organisation is missing.",
-                 ("Check availability for your date", "contact.html?topic=speaking")) + sec("Signature talk", '''<div class="talk"><div></div><div>
-  <h3>Breaking the Demon</h3>
-  <p class="subt">How to beat the invisible barrier that ends half of all scaling founder-CEOs</p>
-  <p>Half of all founder-CEOs are replaced by the time they raise their third round, and most are let go right after hitting a milestone, not after missing one. The cause isn't the market, the idea or the founder. Ten times the headcount is closer to a hundred times the leadership load, and nobody's instincts warn them until they're already fighting the controls. A TOPGUN graduate on the five things fast organisations design on purpose, and how to tell which one is costing you right now.</p>
-</div></div>''') + sec("Formats", '''<div class="cols2">
-    <div><h3>Keynote</h3><p>20 to 25 minutes on crisis judgement and leadership under pressure, built for a main stage</p></div>
+# Speaking (Ed's review, 2026-09-15): leads with the scaling talk and the TOPGUN hook; stage photo at the top
+speaking = phead("Speaking", "Keynotes, firesides and panels", "Breaking the barrier: <em>TOPGUN, speed and leadership</em>",
+                 "Talks for founders, executives and operators on breaking the invisible leadership barriers that fast growth and high-risk environments create. From main stages to leadership offsites.",
+                 ("Check availability for your date", SPEAK),
+                 img=("photo-3.jpg", "Ed Chandler speaking on stage")) + sec("Signature talks", '''<div class="talks">
+  <div class="talk"><span class="eyebrow">Keynote · 20 to 25 minutes</span>
+    <h3>Breaking the Demon</h3>
+    <p class="subt">What the sound barrier, the space race and TOPGUN teach about invisible leadership barriers</p>
+    <p>In the 1940s, test pilots believed a demon waited at the speed of sound: a wall in the air that shook aircraft apart. In 1961, the Soviet Union put the first human into space, and America was losing the space race. And by 1969, U.S. Navy fighter pilots had lost their edge over Vietnam to a less technologically advanced adversary.</p>
+    <p>None of these were solved by technology or the force of one leader alone. Each solution required leadership systems that removed barriers, aligned effort and delivered usable feedback at the speed these challenges demanded.</p>
+    <p>Organisations that grow fast, work under high risk, or face fast-changing markets can learn to identify the hidden barriers challenging their leadership teams — and this talk shows how to break through them.</p></div>
+  <div class="talk"><span class="eyebrow">Motivational talk · 45 minutes</span>
+    <h3>Danger Close</h3>
+    <p class="subt">Leadership at the Edge</p>
+    <p>How does a farm boy from a small town in Oklahoma end up flying Navy fighters into combat, attending TOPGUN, and teaching at the premier Air Warfare Center of Excellence? A story-led talk about becoming a naval aviator: surviving an aircraft carrier, saving brothers and sisters in arms in combat, what the real TOPGUN is like, and what comes after the flying stops. Fun, fast and personal, with lessons that land for any audience.</p></div>
+</div>''') + sec("Formats", '''<div class="cols2">
+    <div><h3>Keynote</h3><p>Built for a main stage, from 20 to 45 minutes</p></div>
     <div><h3>Fireside chat</h3><p>A conversation for founders and operators, with room for the audience's own questions</p></div>
     <div><h3>Working session</h3><p>Hands-on with a leadership team, building the leadership system your organisation is missing</p></div>
     <div><h3>Panel moderation</h3><p>Getting quickly to what actually happened, drawing out every perspective and keeping the panel moving</p></div>
-  </div>''', band=True) + sec("Appearances", '''<div class="table-scroll"><table class="dates">
+  </div>''', band=True, tight=True) + sec("Recent appearances", '''<div class="table-scroll"><table class="dates">
   <tr><td>18 Sep 2026</td><td><strong>Startup Summit Lisbon</strong><br><span class="muted">Moderator, "The Operator's Playbook" · Unicorn Stage</span></td><td>Lisbon</td></tr>
   <tr><td>18 Sep 2026</td><td><strong>Startup Summit Lisbon</strong><br><span class="muted">Fireside, "What Comes After Product-Market Fit" · Impact Stage</span></td><td>Lisbon</td></tr>
-  <tr><td>21 Apr 2026</td><td><strong>American Club of Lisbon</strong></td><td>Lisbon</td></tr>
-</table></div>''') + sec("For event organisers", '''<div class="kit"><img src="images/ed-chandler.jpg" alt="Ed Chandler headshot" width="650" height="900"><div>
-    <p class="bio">Ed Chandler is a TOPGUN graduate and former instructor at the US Navy's centre of excellence for advanced air warfare. A US Naval Academy graduate, his leadership career spans everything from operational combat to modernising NATO doctrine; and from bilateral basing transformations in Asia to running the most complex US Navy installation in Europe, supporting a multinational community of over 13,000 across 55 tenant organisations spanning multiple countries and continents. Today, he helps founders and executives design leadership systems that put decisions at the right level, hold alignment as the company grows, and build judgement at every layer. Founding Chairman of a stealth-mode EU defence startup; board advisor; University of Florida MBA; nearly 3,000 fighter hours and 500+ carrier-arrested landings.</p>
-    <p class="meta">High-resolution headshot on request</p>
-    <div class="actions" style="margin-top:28px"><a class="btn" href="contact.html?topic=speaking">Check availability for your date →</a></div>
+  <tr><td>21 Apr 2026</td><td><strong>American Club of Lisbon</strong><br><span class="muted">"Danger Close: Leadership at the Edge"</span></td><td>Lisbon</td></tr>
+  <tr><td>Earlier</td><td><strong>International Men of Purpose</strong><br><span class="muted">Talk on personal growth and mentorship</span></td><td>Portugal</td></tr>
+  <tr><td></td><td><strong>Boys &amp; Girls Clubs of America</strong><br><span class="muted">Keynote · European District Public Speaking Finals</span></td><td>Europe</td></tr>
+  <tr><td></td><td><strong>University of Maryland Global Campus</strong><br><span class="muted">Graduation keynote · Southern Europe</span></td><td>Europe</td></tr>
+</table></div>''', tight=True) + sec("For event organisers", '''<div class="kit solo"><div>
+    <p class="bio">Ed Chandler is a TOPGUN graduate and former instructor who went on to lead at NATO and U.S. Navy headquarters in Europe. Today he helps founders and executives build leadership systems that keep up with their company's growth. Founder of PriFly Advisors, based in Lisbon.</p>
+    <p class="meta">Longer bio and high-resolution headshot on request</p>
+    <div class="actions" style="margin-top:28px"><a class="btn" href="''' + SPEAK + '''">Check availability for your date →</a></div>
+    <p class="meta">Or write to <a href="mailto:''' + SPEAK_TO + '''">''' + SPEAK_TO + '''</a></p>
+    <p class="meta">TOPGUN is a trademark of the U.S. Navy. No endorsement is implied.</p>
   </div></div>''', band=True)
 
 # ---------- DEFENCE ----------
