@@ -201,14 +201,16 @@ speaking = phead("Speaking", "Keynotes, firesides and panels", "Breaking the bar
                  img=("photo-3.jpg", "Ed Chandler speaking on stage")) + sec("Signature talks", '''<div class="talks">
   <div class="talk"><span class="eyebrow">Keynote · 20 to 25 minutes</span>
     <h3>Breaking the Demon</h3>
-    <p class="subt">What the sound barrier, the space race and TOPGUN teach about invisible leadership barriers</p>
-    <p>In the 1940s, test pilots believed a demon waited at the speed of sound: a wall in the air that shook aircraft apart. In 1961, the Soviet Union put the first human into space, and America was losing the space race. And by 1969, U.S. Navy fighter pilots had lost their edge over Vietnam to a less technologically advanced adversary.</p>
+    <p class="subt">Overcoming hidden leadership barriers</p>
+    <p>In the 1940s, test pilots believed a demon waited at the speed of sound: a wall in the air that shook aircraft apart. In 1961, the Soviet Union put the first human into space, and America was losing the space race. And by 1969, U.S. Navy fighter pilots had lost a 10X advantage over less technologically advanced adversaries.</p>
     <p>None of these were solved by technology or the force of one leader alone. Each solution required leadership systems that removed barriers, aligned effort and delivered usable feedback at the speed these challenges demanded.</p>
     <p>Organisations that grow fast, work under high risk, or face fast-changing markets can learn to identify the hidden barriers challenging their leadership teams — and this talk shows how to break through them.</p></div>
   <div class="talk"><span class="eyebrow">Motivational talk · 45 minutes</span>
     <h3>Danger Close</h3>
     <p class="subt">Leadership at the Edge</p>
-    <p>How does a farm boy from a small town in Oklahoma end up flying Navy fighters into combat, attending TOPGUN, and teaching at the premier Air Warfare Center of Excellence? A story-led talk about becoming a naval aviator: surviving an aircraft carrier, saving brothers and sisters in arms in combat, what the real TOPGUN is like, and what comes after the flying stops. Fun, fast and personal, with lessons that land for any audience.</p></div>
+    <p>How does a farm boy from a small town in Oklahoma end up at the U.S. Naval Academy, flying fighters into combat from nuclear-powered aircraft carriers, graduating from TOPGUN and teaching at the world's premier air warfare centre of excellence?</p>
+    <p>A story-led talk about becoming a naval aviator: surviving combat and night landings at sea, flying into danger to save others, and what <em>the real</em> TOPGUN is like. It's a motivational look at overcoming perceived barriers and fear, and why life often begins after the flying stops.</p>
+    <p>Fun, fast and personal, with lessons that land for any audience.</p></div>
 </div>''') + sec("Formats", '''<div class="cols2">
     <div><h3>Keynote</h3><p>Built for a main stage, from 20 to 45 minutes</p></div>
     <div><h3>Fireside chat</h3><p>A conversation for founders and operators, with room for the audience's own questions</p></div>
@@ -222,7 +224,7 @@ speaking = phead("Speaking", "Keynotes, firesides and panels", "Breaking the bar
   <tr><td></td><td><strong>Boys &amp; Girls Clubs of America</strong><br><span class="muted">Keynote · European District Public Speaking Finals</span></td><td>Europe</td></tr>
   <tr><td></td><td><strong>University of Maryland Global Campus</strong><br><span class="muted">Graduation keynote · Southern Europe</span></td><td>Europe</td></tr>
 </table></div>''', tight=True) + sec("For event organisers", '''<div class="kit solo"><div>
-    <p class="bio">Ed Chandler is a TOPGUN graduate and former instructor who went on to lead at NATO and U.S. Navy headquarters in Europe. Today he helps founders and executives build leadership systems that keep up with their company's growth. Founder of PriFly Advisors, based in Lisbon.</p>
+    <p class="bio">Ed Chandler is a former U.S. naval aviator and TOPGUN graduate who went on to teach tactics and leadership at the world's premier air warfare centre of excellence. With a 30-year leadership career spanning roles across the Asia-Pacific, NATO and U.S. Navy headquarters in Europe, today he helps leaders build the systems that keep up with their company's growth. Founder of PriFly Advisors, based in Lisbon and available worldwide.</p>
     <p class="meta">Longer bio and high-resolution headshot on request</p>
     <div class="actions" style="margin-top:28px"><a class="btn" href="''' + SPEAK + '''">Check availability for your date →</a></div>
     <p class="meta">Or write to <a href="mailto:''' + SPEAK_TO + '''">''' + SPEAK_TO + '''</a></p>
