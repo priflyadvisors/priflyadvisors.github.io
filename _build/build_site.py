@@ -86,7 +86,7 @@ LD = ('<script type="application/ld+json">{"@context":"https://schema.org","@typ
 doors = [
     ("coaching.html", "Founders &amp; executives", "When the company is growing faster than its leadership", "Book a 30-minute call"),
     ("speaking.html", "Event organisers", "Planning a conference, summit or leadership offsite and need a speaker who holds the room", "Check availability for your date"),
-    ("defence.html", "Defence companies crossing the Atlantic", "U.S. firms entering Europe, European firms navigating American institutions", "Start a conversation"),
+    ("defence.html", "Defence companies", "Contract support and market entry across the Atlantic", "Start a conversation"),   # Ed, 2026-09-15: minimum essential
 ]
 door_html = "".join(f'<li><a href="{h}"><span class="client">{c}</span><span class="desc">{d}</span><span class="go">{g} →</span></a></li>' for h, c, d, g in doors)
 
@@ -232,16 +232,17 @@ speaking = phead("Speaking", "Keynotes, firesides and panels", "Breaking the bar
   </div></div>''', band=True)
 
 # ---------- DEFENCE ----------
-defence = phead("Defence", "Transatlantic Defence Advisory", "Opening doors <em>and building partnerships</em>",
-                "Helping U.S. and European defence companies, institutions and governments navigate the transatlantic relationship, translating between cultures and systems.") + '''
-<section><div class="wrap"><div class="cols3">
-  <div><h3>Market orientation</h3><p>For U.S. technology entering European markets, and European firms navigating American institutions</p></div>
-  <div><h3>Institutional introductions</h3><p>The relationships and decision-making environments where transatlantic defence business actually happens</p></div>
-  <div><h3>Strategic positioning</h3><p>For companies operating in the transatlantic defence space</p></div>
-</div></div></section>''' + sec("Background", '''<div class="prose">
-  <p>NATO staff duty at STRIKFORNATO, and Executive Officer of Naval Support Activity Naples: two assignments in allied operations, transatlantic defence relationships and the institutional machinery that connects American and European security.</p>
-  <p>I helped NATO develop its first Joint Air Power Doctrine, and I've been based in Portugal for six years.</p></div>''', band=True) + cta(
-    "A defence question?", "A market question, a transatlantic introduction or a partnership to build.", "Start a conversation", "contact.html?topic=defence")
+# Defence (Ed's review, 2026-09-15): a minor role, two specific offers plus board roles; no background
+# section (About and LinkedIn cover it), no company names, one plain contact button
+defence = phead("Defence", "Defence advisory", "Defence support <em>on both sides of the Atlantic</em>",
+                "I take on selected defence work and serve on boards, helping defence businesses expand and refine their strategy.") + '''
+<section class="tight snug"><div class="wrap"><div class="cols2 plain">
+  <div><h3>Contract support</h3><p>For firms that need a Europe-based American on contract, with aviation, overseas basing, NATO and U.S. Navy experience</p></div>
+  <div><h3>Market-entry scoping</h3><p>A first look for U.S. companies entering Europe, or European companies entering the U.S.</p></div>
+</div>
+<p class="muted" style="margin-top:20px">My background: <a href="about.html">About</a> · <a href="https://www.linkedin.com/in/edchandler96/" rel="noopener">LinkedIn</a></p>
+<div class="actions" style="margin-top:20px"><a class="btn" href="contact.html?topic=defence">Contact me →</a></div>
+</div></section>'''
 
 # ---------- ABOUT ----------
 about = phead("About", "About", "Ed Chandler", "Executive coach, leadership advisor and speaker · Founder of PriFly Advisors · Lisbon") + '''
@@ -304,8 +305,8 @@ pages = [
      "Helping leaders lead more, carry less: a leadership system that changes with your company, and coaching for the leaders who run it. Executive coaching and leadership advisory in Lisbon, Portugal and Europe: a 30-minute call, the Leadership Analysis, then coaching.", "coaching", coaching, ""),
     ("speaking", "Speaking | Ed Chandler, PriFly Advisors",
      "TOPGUN-inspired keynotes, firesides, working sessions and panel moderation on crisis judgement and leadership under pressure.", "speaking", speaking, ""),
-    ("defence", "Transatlantic Defence Advisory | PriFly Advisors",
-     "Helping U.S. and European defence companies, institutions and governments navigate the transatlantic relationship.", "defence", defence, ""),
+    ("defence", "Defence Advisory | PriFly Advisors",
+     "Selected defence work from Lisbon: contract support for firms that need a Europe-based American, market-entry scoping across the Atlantic, and board roles.", "defence", defence, ""),
     ("about", "About Ed Chandler | PriFly Advisors",
      "28 years in the U.S. Navy, TOPGUN graduate and instructor, NATO and U.S. Navy leadership in Europe. Now an executive coach and leadership advisor in Lisbon.", "about", about, ""),
     ("contact", "Contact | PriFly Advisors", "Get in touch about coaching, speaking or transatlantic defence advisory.", "contact", contact, ""),

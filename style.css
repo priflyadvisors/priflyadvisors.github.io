@@ -135,7 +135,12 @@
   /* Ed, 2026-09-15: two signature talks side by side, each marked with its format and length */
   .talks{display:grid;grid-template-columns:1fr 1fr;gap:56px}
   .talk p + p{margin-top:14px}
-  .kit.solo{display:block}   /* Ed, 2026-09-15: organiser section without the headshot */
+  .kit.solo{display:block}
+  .cols2.plain{border-top:0}                               /* Ed, 2026-09-15: Defence columns without the rules above and below */
+  section.tight .cols2.plain > div{border-bottom:0;padding-top:0;padding-bottom:0}
+  /* Ed, 2026-09-15: Defence fits one desktop screen without scrolling */
+  section.snug{padding:40px 0 48px}
+  .phead:has(+ section.snug){padding-bottom:36px}   /* Ed, 2026-09-15: organiser section without the headshot */
   .talk{border-top:1px solid var(--ink);padding-top:28px}
   .talk .eyebrow{display:block;margin-bottom:14px}
   .talk h3{font-size:clamp(30px,3vw,40px);line-height:1.08}
