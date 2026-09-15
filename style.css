@@ -48,8 +48,8 @@
   .btn.ghost{background:transparent;color:var(--ink)}
   .btn.ghost:hover{background:var(--mist)}
   .actions{display:flex;gap:14px;flex-wrap:wrap}
-  section{padding:96px 0}
-  section.tight{padding:64px 0}
+  section{padding:56px 0}   /* AI-look pass, Ed 2026-09-15: was 96 */
+  section.tight{padding:56px 0}   /* AI-look pass: was 64 */
   /* Ed, 2026-09-15: less white space in Speaking's Formats and Recent appearances */
   section.tight .sec-head{margin-bottom:28px}
   section.tight .cols2 > div{padding-top:24px;padding-bottom:24px}
@@ -225,7 +225,7 @@
     .cols2{grid-template-columns:1fr}
     .cols2 > div,.cols2 > div:nth-child(even){padding:28px 0;border-left:0}
     .form .row{grid-template-columns:1fr}
-    section{padding:64px 0}
+    section{padding:56px 0}
     .phead{padding:56px 0 40px}
     .dates td:first-child{width:120px}
   }
@@ -366,3 +366,68 @@
 
   /* ---- No rule under the last step: the section break already does that job ---- */
   .steps > li:last-child{border-bottom:0;padding-bottom:0}
+
+  /* ---- "It looks like AI built this" pass (Ed, 2026-09-15; decisions in online-presence copy/priflyadvisors-com.md) ---- */
+  /* Buttons and links in sentence case; the arrows are gone from the build */
+  .btn,.index .go{text-transform:none;letter-spacing:.01em;font-size:15px}
+  .index .go{text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:1px;text-underline-offset:6px}
+  /* Gold words in headings stay gold, set upright */
+  h1 em,h2 em{font-style:normal}
+
+  /* Home: Goldsmith quote on one line, attribution beneath it aligned to the quote's right end */
+  .quote-band .wrap{display:grid;justify-content:start}
+  .quote-band blockquote{max-width:none;text-wrap:balance}
+  @media (min-width:901px){.quote-band blockquote{white-space:nowrap}}
+  .quote-band cite{text-align:right}
+  /* Home photo row: the Tomcat large on the left, the other two stacked; no captions (files cropped to their frames) */
+  @media (min-width:901px){
+    .photo-row{grid-template-columns:2fr 1fr;gap:20px 24px}
+    .photo-row figure:first-child{grid-row:1 / span 2;position:relative;overflow:hidden}
+    .photo-row figure:first-child img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover}
+  }
+  /* Home: tighter space around "Who I work for" */
+  section.who{padding:48px 0 56px}
+  section.who .sec-head{margin-bottom:28px}
+
+  /* Coaching: "Why me" bracketed by then and now */
+  .why-grid{display:grid;grid-template-columns:210px 1fr 210px;grid-template-areas:"then head now" "then text now";column-gap:48px;align-items:center}
+  .why-grid .sec-head{grid-area:head;margin-bottom:20px;align-self:end}
+  .why-grid .prose{grid-area:text;align-self:start}
+  .why-grid figure{margin:0}
+  .why-grid .why-then{grid-area:then}
+  .why-grid .why-now{grid-area:now}
+  .why-grid img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+  @media (max-width:900px){
+    .why-grid{grid-template-columns:1fr 1fr;grid-template-areas:"then now" "head head" "text text";column-gap:16px}
+    .why-grid figure{margin-bottom:28px}
+  }
+  /* Coaching: "What I look at" rows spaced so its bottom line meets the line between steps 2 and 3 */
+  @media (min-width:901px){.asks li{padding-top:23.6px;padding-bottom:23.6px}}
+  /* Coaching: the Truman trap photo fills from 24px under the list to the bottom of step 3 */
+  .asks-photo{margin:24px 0 0}
+  .asks-photo img{display:block;width:100%;aspect-ratio:2/1;object-fit:cover;object-position:50% 45%}
+  @media (min-width:901px){
+    .two-col{align-items:stretch}
+    .two-col > div:first-child{display:flex;flex-direction:column}
+    .asks-photo{flex:1;min-height:0;position:relative}
+    .asks-photo img{position:absolute;inset:0;height:100%;aspect-ratio:auto}
+  }
+
+  /* Speaking: talk labels in normal case; subtitles upright; bio without the gold rule */
+  .talk .eyebrow{text-transform:none;letter-spacing:.01em;font-size:14px}
+  .talk .subt{font-style:normal}
+  .kit .bio{border-left:0;padding-left:0}
+
+  /* Defence: headline on two lines, the gold line kept on one line on desktop; no divider between the columns */
+  .phead h1:has(br){max-width:none}
+  @media (min-width:901px){.phead h1:has(br) em{white-space:nowrap}}
+  .cols2.plain > div:nth-child(even){border-left:0}
+
+  /* About: "Naval aviation slang" and "Listen" in normal case */
+  .define .src{text-transform:none;letter-spacing:.01em;font-size:13px}
+  .define .listen{text-transform:none;letter-spacing:.01em;font-size:14px}
+
+  /* Contact: labels in normal case; "(speaking only)" beside "Event date" */
+  .contact-form .eyebrow{text-transform:none;letter-spacing:.01em;font-size:13px}
+  .form label{text-transform:none;letter-spacing:.01em;font-size:13px}
+  .form .hint{display:inline;margin-left:4px}

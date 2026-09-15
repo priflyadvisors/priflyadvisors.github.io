@@ -43,10 +43,10 @@ def page(slug, title, desc, active, body, extra_head=""):
     return f'<!DOCTYPE html>\n<html lang="en-GB">\n<head>{head}</head>\n<body>\n{header(active)}\n<main>\n{body}\n</main>\n{FOOTER}\n</body>\n</html>\n'
 
 def cta(h, line, btn, href):
-    return f'<section class="band cta"><div class="wrap"><div><h2>{h}</h2><p class="muted">{line}</p></div><div class="actions"><a class="btn" href="{href}">{btn} →</a></div></div></section>'
+    return f'<section class="band cta"><div class="wrap"><div><h2>{h}</h2><p class="muted">{line}</p></div><div class="actions"><a class="btn" href="{href}">{btn}</a></div></div></section>'
 
 def phead(crumb, eyebrow, h1, lede, button=None, img=None):
-    b = f'<div class="actions"><a class="btn" href="{button[1]}">{button[0]} →</a></div>' if button else ""
+    b = f'<div class="actions"><a class="btn" href="{button[1]}">{button[0]}</a></div>' if button else ""
     text = f'<span class="eyebrow">{eyebrow}</span><h1>{h1}</h1><p class="lede">{lede}</p>{b}'
     fig = ""
     if img:
@@ -59,8 +59,8 @@ def phead(crumb, eyebrow, h1, lede, button=None, img=None):
         return f'<div class="phead"><div class="wrap phead-grid"><div class="phead-text">{text}</div>{fig}</div></div>'
     return f'<div class="phead"><div class="wrap">{text}</div></div>'
 
-def sec(title, inner, band=False, tight=False):
-    cls = " ".join(c for c, on in (("band", band), ("tight", tight)) if on)
+def sec(title, inner, band=False, tight=False, extra=""):
+    cls = " ".join(c for c, on in (("band", band), ("tight", tight), (extra, bool(extra))) if on)
     return f'<section{f" class=\"{cls}\"" if cls else ""}><div class="wrap"><div class="sec-head"><h2>{title}</h2></div>{inner}</div></section>'
 
 # Photo row (Ed, review 1): mostly wordless images with short captions, replacing the credentials strip.
@@ -68,14 +68,15 @@ def sec(title, inner, band=False, tight=False):
 # (pass --live to build without placeholders).
 LIVE = "--live" in sys.argv
 # Photos (Ed, 2026-09-15): descriptive file names, alt text that says what the photo shows; originals in ~/Downloads/site-images/picked
-PHOTOS = [("ed-chandler-f14-tomcat.jpg", "TOPGUN graduate and instructor", "Ed Chandler with an F-14 Tomcat"),
-          ("ed-chandler-naples-vesuvius.jpg", "Leading at NATO and U.S. Navy headquarters in Europe", "Ed Chandler in Naples, Italy, with Mount Vesuvius behind him"),
-          ("ed-chandler-speaking-osac-lisbon.jpg", "Speaker and moderator", "Ed Chandler speaking to an audience at OSAC Lisbon")]
-def _fig(fname, cap, alt):
+# AI-look pass (Ed, 2026-09-15): no captions (what they said is in the alt text); files cropped to the agreed frames
+PHOTOS = [("ed-chandler-f14-tomcat.jpg", "Ed Chandler, TOPGUN graduate and instructor, with an F-14 Tomcat"),
+          ("ed-chandler-naples-vesuvius.jpg", "Ed Chandler in Naples, Italy, with Mount Vesuvius behind him, while leading at NATO and U.S. Navy headquarters in Europe"),
+          ("ed-chandler-speaking-osac-lisbon.jpg", "Ed Chandler speaking to an audience at OSAC Lisbon")]
+def _fig(fname, alt):
     if os.path.exists(os.path.join(OUT, "images", fname)):
-        return f'<figure><img src="images/{fname}" alt="{alt}" loading="lazy"><figcaption>{cap}</figcaption></figure>'
-    return None if LIVE else f'<figure><div class="ph" aria-hidden="true">Photo to come</div><figcaption>{cap}</figcaption></figure>'
-_figs = [f for f in (_fig(n, c, a) for n, c, a in PHOTOS) if f]
+        return f'<figure><img src="images/{fname}" alt="{alt}" loading="lazy"></figure>'
+    return None if LIVE else '<figure><div class="ph" aria-hidden="true">Photo to come</div></figure>'
+_figs = [f for f in (_fig(n, a) for n, a in PHOTOS) if f]
 PHOTO_ROW = f'<section class="photos"><div class="wrap"><div class="photo-row">{"".join(_figs)}</div></div></section>' if _figs else ""
 
 # ---------- HOME ----------
@@ -89,14 +90,14 @@ doors = [
     ("speaking.html", "Event organisers", "Planning a conference, summit or leadership offsite and need a speaker who holds the room", "Check availability for your date"),
     ("defence.html", "Defence companies", "Contract support and market entry across the Atlantic", "Start a conversation"),   # Ed, 2026-09-15: minimum essential
 ]
-door_html = "".join(f'<li><a href="{h}"><span class="client">{c}</span><span class="desc">{d}</span><span class="go">{g} →</span></a></li>' for h, c, d, g in doors)
+door_html = "".join(f'<li><a href="{h}"><span class="client">{c}</span><span class="desc">{d}</span><span class="go">{g}</span></a></li>' for h, c, d, g in doors)
 
 home = f'''
 <div class="hero"><div class="wrap">
   <div class="hero-text">
     <h1>Leadership that performs <em>as a team</em></h1>
     <p class="lede">When every decision still comes back to you, the company can only move as fast as you can. I help you build a leadership team that makes the right calls without you in the room.</p>
-    <div class="actions"><a class="btn" href="{BOOK}">Book a 30-minute call →</a><a class="btn ghost" href="coaching.html">How I work</a></div>
+    <div class="actions"><a class="btn" href="{BOOK}">Book a 30-minute call</a><a class="btn ghost" href="coaching.html">How I work</a></div>
   </div>
   <figure class="portrait"><img src="images/ed-chandler.jpg" alt="Ed Chandler, founder of PriFly Advisors" width="650" height="900"></figure>
 </div></div>
@@ -105,8 +106,8 @@ home = f'''
   <cite>Marshall Goldsmith, executive coach and author</cite>
 </div></section>
 {PHOTO_ROW}
-{sec("Who I work with", f'<ul class="index">{door_html}</ul>')}
-{cta("Let's talk", "Whether it's a leadership challenge, a speaking engagement or a transatlantic defence question, reach out.", "Get in touch", "contact.html")}
+{sec("Who I work <em>for</em>", f'<ul class="index">{door_html}</ul>', extra="who")}
+{cta("Let's talk", "Whether it's a leadership challenge, a speaking engagement or a transatlantic defence question", "Get in touch", "contact.html")}
 '''
 
 # ---------- COACHING ----------
@@ -143,16 +144,16 @@ def _leader_svg(n, status, label):
 GROWTH = (
     '<div class="growth">'
     f'<figure class="g-fig">{_leader_svg(10, "ok", "10 people with you in the middle: 45 relationships, 9 of them yours, manageable")}'
-    '<figcaption><strong>10 people</strong> · 45 relationships<br>9 are yours · manageable</figcaption></figure>'
+    '<figcaption><strong>10 people</strong>, 45 relationships<br>9 are yours, manageable</figcaption></figure>'
     '<div class="g-text"><p class="g-big">Double the headcount = quadruple the leadership burden</p></div>'
     f'<figure class="g-fig">{_leader_svg(20, "strained", "20 people with you in the middle: 190 relationships, 19 of them yours, strained")}'
-    '<figcaption><strong>20 people</strong> · 190 relationships<br>19 are yours · strained</figcaption></figure>'
+    '<figcaption><strong>20 people</strong>, 190 relationships<br>19 are yours, strained</figcaption></figure>'
     '</div>'
 )
 
 def cta2(h, href):
     return (f'<section class="cta"><div class="wrap"><div><h2>{h}</h2></div><div class="actions">'
-            f'<a class="btn" href="{href}">Book a 30-minute call →</a><a class="btn ghost" href="mailto:ed@priflyadvisors.com">Email me</a></div></div></section>')
+            f'<a class="btn" href="{href}">Book a 30-minute call</a><a class="btn ghost" href="mailto:ed@priflyadvisors.com">Email me</a></div></div></section>')
 
 areas = [("Decisions", "Who decides what, and where are decisions stuck?", ""),
          ("Rhythms &amp; rituals", "Do your meetings make decisions, share key information, or just waste time?", ""),
@@ -171,7 +172,18 @@ SIGNS = """
 
 WHY = """<div class="prose prose-wide">
   <p>For more than 30 years I didn't just hold leadership roles. I was formed inside one of the most deliberate leadership systems in the world, one built to turn newcomers into leaders of thousands, drawing on hard-won lessons about how people behave under pressure, learned long before anyone called it a science. I led and taught at every level of it, in high-stakes environments across the U.S. and Europe. Now I help companies build the same thing for themselves: a system that supports its leaders, adapts as the company changes, and grows new leaders from within.</p>
-  <p><a href="about.html">My story →</a></p></div>"""
+  <p><a href="about.html">My story</a></p></div>"""
+
+# Why me (Ed, 2026-09-15): bracketed by then and now: Academy portrait left, Naples XO portrait right
+WHY_SECTION = ('<section class="band"><div class="wrap why-grid">'
+    '<figure class="why-then"><img src="images/ed-chandler-naval-academy-midshipman.jpg" alt="Ed Chandler as a second-year midshipman at the U.S. Naval Academy" loading="lazy"></figure>'
+    '<div class="sec-head"><h2>Why me</h2></div>' + WHY +
+    '<figure class="why-now"><img src="images/ed-chandler-xo-naples-official.jpg" alt="Commander Ed Chandler, official photo as executive officer at Naval Support Activity Naples" loading="lazy"></figure>'
+    '</div></section>')
+
+# Beside step 3 (Ed, 2026-09-15): his 500th trap aboard the Truman
+TRAP = ('<figure class="asks-photo"><img src="images/ed-chandler-500th-trap-truman.jpg" '
+        'alt="Ed Chandler&#39;s 500th arrested landing, in an F/A-18 catching the wire aboard USS Harry S. Truman" loading="lazy"></figure>')
 
 STEPS = """
   <ol class="steps">
@@ -186,11 +198,11 @@ coaching = (phead("Coaching", "Executive Coaching &amp; Leadership Advisory", "H
                   "Grow your team, extend your reach, reduce the decisions that land on your desk. I help you build the systems to get there, and coach you through the dip, when old habits pull everyone back.",
                   ("Book a 30-minute call", BOOK), img=("ed-chandler-leadership-session-whiteboard.jpg", "Ed Chandler at a whiteboard, leading a session with a leadership team"))
             + sec("Is this you or your organisation?", SIGNS + GROWTH)
-            + sec("Why me", WHY, band=True)
+            + WHY_SECTION
             + ('<section class="tight-bottom"><div class="wrap two-col">'
                '<div><div class="sec-head"><h2>What I look at</h2></div><ul class="signs asks">'
-               + "".join(f"<li>{q}</li>" for _, q, _ in areas) + '</ul></div>'
-               '<div><div class="sec-head"><h2>How we work together</h2></div>' + STEPS + '</div>'
+               + "".join(f"<li>{q}</li>" for _, q, _ in areas) + '</ul>' + TRAP + '</div>'
+               '<div><div class="sec-head"><h2>How we\'ll work together</h2></div>' + STEPS + '</div>'
                '</div></section>')
             + cta2("Start with a conversation", BOOK))
 
@@ -200,13 +212,13 @@ speaking = phead("Speaking", "Keynotes, firesides and panels", "Breaking the bar
                  "Talks for founders, executives and operators on breaking the invisible leadership barriers that fast growth and high-risk environments create. From main stages to leadership offsites.",
                  ("Check availability for your date", SPEAK),
                  img=("ed-chandler-presenting-osac-lisbon.jpg", "Ed Chandler presenting at OSAC Lisbon, his slides on the screen beside him")) + sec("Signature talks", '''<div class="talks">
-  <div class="talk"><span class="eyebrow">Keynote · 20 to 25 minutes</span>
+  <div class="talk"><span class="eyebrow">Keynote, 20 to 25 minutes</span>
     <h3>Breaking the Demon</h3>
     <p class="subt">Overcoming hidden leadership barriers</p>
     <p>In the 1940s, test pilots believed a demon waited at the speed of sound: a wall in the air that shook aircraft apart. In 1961, the Soviet Union put the first human into space, and America was losing the space race. And by 1969, U.S. Navy fighter pilots had lost a 10X advantage over less technologically advanced adversaries.</p>
     <p>None of these were solved by technology or the force of one leader alone. Each solution required leadership systems that removed barriers, aligned effort and delivered usable feedback at the speed these challenges demanded.</p>
     <p>Organisations that grow fast, work under high risk, or face fast-changing markets can learn to identify the hidden barriers challenging their leadership teams — and this talk shows how to break through them.</p></div>
-  <div class="talk"><span class="eyebrow">Motivational talk · 45 minutes</span>
+  <div class="talk"><span class="eyebrow">Motivational talk, 45 minutes</span>
     <h3>Danger Close</h3>
     <p class="subt">Leadership at the Edge</p>
     <p>How does a farm boy from a small town in Oklahoma end up at the U.S. Naval Academy, flying fighters into combat from nuclear-powered aircraft carriers, graduating from TOPGUN and teaching at the world's premier air warfare centre of excellence?</p>
@@ -218,16 +230,16 @@ speaking = phead("Speaking", "Keynotes, firesides and panels", "Breaking the bar
     <div><h3>Working session</h3><p>Hands-on with a leadership team, building the leadership system your organisation is missing</p></div>
     <div><h3>Panel moderation</h3><p>Getting quickly to what actually happened, drawing out every perspective and keeping the panel moving</p></div>
   </div>''', band=True, tight=True) + sec("Recent appearances", '''<div class="table-scroll"><table class="dates">
-  <tr><td>18 Sep 2026</td><td><strong>Startup Summit Lisbon</strong><br><span class="muted">Moderator, "The Operator's Playbook" · Unicorn Stage</span></td><td>Lisbon</td></tr>
-  <tr><td>18 Sep 2026</td><td><strong>Startup Summit Lisbon</strong><br><span class="muted">Fireside, "What Comes After Product-Market Fit" · Impact Stage</span></td><td>Lisbon</td></tr>
+  <tr><td>18 Sep 2026</td><td><strong>Startup Summit Lisbon</strong><br><span class="muted">Moderator, "The Operator's Playbook", Unicorn Stage</span></td><td>Lisbon</td></tr>
+  <tr><td>18 Sep 2026</td><td><strong>Startup Summit Lisbon</strong><br><span class="muted">Fireside, "What Comes After Product-Market Fit", Impact Stage</span></td><td>Lisbon</td></tr>
   <tr><td>21 Apr 2026</td><td><strong>American Club of Lisbon</strong><br><span class="muted">"Danger Close: Leadership at the Edge"</span></td><td>Lisbon</td></tr>
   <tr><td>Earlier</td><td><strong>International Men of Purpose</strong><br><span class="muted">Talk on personal growth and mentorship</span></td><td>Portugal</td></tr>
-  <tr><td></td><td><strong>Boys &amp; Girls Clubs of America</strong><br><span class="muted">Keynote · European District Public Speaking Finals</span></td><td>Europe</td></tr>
-  <tr><td></td><td><strong>University of Maryland Global Campus</strong><br><span class="muted">Graduation keynote · Southern Europe</span></td><td>Europe</td></tr>
+  <tr><td></td><td><strong>Boys &amp; Girls Clubs of America</strong><br><span class="muted">Keynote, European District Public Speaking Finals</span></td><td>Europe</td></tr>
+  <tr><td></td><td><strong>University of Maryland Global Campus</strong><br><span class="muted">Graduation keynote, Southern Europe</span></td><td>Europe</td></tr>
 </table></div>''', tight=True) + sec("For event organisers", '''<div class="kit solo"><div>
     <p class="bio">Ed Chandler is a former U.S. naval aviator and TOPGUN graduate who went on to teach tactics and leadership at the world's premier air warfare centre of excellence. With a 30-year leadership career spanning roles across the Asia-Pacific, NATO and U.S. Navy headquarters in Europe, today he helps leaders build the systems that keep up with their company's growth. Founder of PriFly Advisors, based in Lisbon and available worldwide.</p>
     <p class="meta">Longer bio and high-resolution headshot on request</p>
-    <div class="actions" style="margin-top:28px"><a class="btn" href="''' + SPEAK + '''">Check availability for your date →</a></div>
+    <div class="actions" style="margin-top:28px"><a class="btn" href="''' + SPEAK + '''">Check availability for your date</a></div>
     <p class="meta">Or write to <a href="mailto:''' + SPEAK_TO + '''">''' + SPEAK_TO + '''</a></p>
     <p class="meta">TOPGUN is a trademark of the U.S. Navy. No endorsement is implied.</p>
   </div></div>''', band=True)
@@ -235,20 +247,20 @@ speaking = phead("Speaking", "Keynotes, firesides and panels", "Breaking the bar
 # ---------- DEFENCE ----------
 # Defence (Ed's review, 2026-09-15): a minor role, two specific offers plus board roles; no background
 # section (About and LinkedIn cover it), no company names, one plain contact button
-defence = phead("Defence", "Defence advisory", "Defence support <em>on both sides of the Atlantic</em>",
+defence = phead("Defence", "Defence advisory", "Defence support<br><em>on both sides of the Atlantic</em>",
                 "I take on selected defence work and serve on boards, helping defence businesses expand and refine their strategy.") + '''
 <section class="tight snug"><div class="wrap"><div class="cols2 plain">
   <div><h3>Contract support</h3><p>For firms that need a Europe-based American on contract, with aviation, overseas basing, NATO and U.S. Navy experience</p></div>
   <div><h3>Market-entry scoping</h3><p>A first look for U.S. companies entering Europe, or European companies entering the U.S.</p></div>
 </div>
-<p class="muted" style="margin-top:20px">My background: <a href="about.html">About</a> · <a href="https://www.linkedin.com/in/edchandler96/" rel="noopener">LinkedIn</a></p>
-<div class="actions" style="margin-top:20px"><a class="btn" href="contact.html?topic=defence">Contact me →</a></div>
+<p class="muted" style="margin-top:20px">My background: <a href="about.html">About</a>, <a href="https://www.linkedin.com/in/edchandler96/" rel="noopener">LinkedIn</a></p>
+<div class="actions" style="margin-top:20px"><a class="btn" href="contact.html?topic=defence">Contact me</a></div>
 </div></section>'''
 
 # ---------- ABOUT ----------
 # About (Ed's review, 2026-09-15): two paragraphs in Ed's words; facts become three columns; tighter sections
 about = phead("About", "About", "Ed Chandler",
-              '<span class="nw">Executive coach, leadership advisor and speaker</span> · <span class="nw">Founder of PriFly Advisors · Lisbon</span>') + '''
+              '<span class="nw">Executive coach, leadership advisor and speaker</span><br><span class="nw">Founder of PriFly Advisors, Lisbon</span>') + '''
 <section class="tight"><div class="wrap about-grid">
   <div>
     <figure class="portrait"><img src="images/ed-chandler-navy-career-desk.jpg" alt="Ed Chandler at his desk, with plaques and photos from his Navy career on the wall behind him"></figure>
@@ -256,7 +268,7 @@ about = phead("About", "About", "Ed Chandler",
   <div class="prose">
     <p>I spent 28 years in the U.S. Navy flying fighters, learning from the best as a TOPGUN graduate and training the best as an instructor at the Navy's Strike and Air Warfare Center of Excellence. I helped oversee entire carrier strike groups in the Pacific, led a “first in generations” major basing build-out and move in Japan, helped NATO develop its first Joint Air Power Doctrine, and led at some of the U.S. military's most complex organisations along the way.</p>
     <p>Now based in Portugal, but working globally, I help founders and executives build the leadership systems that let organisations perform under pressure, as an executive coach, leadership advisor and speaker. I founded PriFly Advisors to provide both the strategic and tactical advisory I saw many organisations needed to help them grow while escaping the leadership growth trap rapidly scaling or dynamic companies face — grounded in the credibility that only comes from decades of operating in high-stakes environments.</p>
-    <div class="actions" style="margin-top:12px"><a class="btn" href="contact.html">Get in touch →</a><a class="btn ghost" href="https://www.linkedin.com/in/edchandler96/" rel="noopener">LinkedIn</a></div>
+    <div class="actions" style="margin-top:12px"><a class="btn" href="contact.html">Get in touch</a><a class="btn ghost" href="https://www.linkedin.com/in/edchandler96/" rel="noopener">LinkedIn</a></div>
   </div>
 </div></section>
 <section class="band tight"><div class="wrap cols3 bio-facts">
@@ -269,7 +281,8 @@ about = phead("About", "About", "Ed Chandler",
     <li>Air Boss, Centennial of Naval Aviation Parade of Flight</li>
     <li>Air Boss, NAS Oceana, Master Jet Base</li>
     <li>Executive Officer, Naval Support Activity Naples</li>
-    <li>Founding Chairman, EU defence startup · Board advisor</li>
+    <li>Founding Chairman, EU defence startup</li>
+    <li>Board advisor</li>
   </ul></div>
   <div><h3>Education</h3><ul class="cred">
     <li>U.S. Naval Academy<span class="sub">BS Economics</span></li>
@@ -296,7 +309,7 @@ about = phead("About", "About", "Ed Chandler",
 '''
 
 # ---------- CONTACT ----------
-contact = phead("Contact", "Contact", "Let's talk", "Whether it's a leadership challenge, a speaking engagement or a transatlantic defence question, reach out.") + '''
+contact = phead("Contact", "Contact", "Let's talk", "Whether it's a leadership challenge, a speaking engagement or a transatlantic defence question") + '''
 <section class="tight snug contact-form"><div class="wrap split">
   <div class="prose" style="font-size:15px">
     <p><span class="eyebrow">Email</span><br><a href="mailto:ed@priflyadvisors.com">ed@priflyadvisors.com</a></p>
@@ -311,7 +324,7 @@ contact = phead("Contact", "Contact", "Let's talk", "Whether it's a leadership c
     </div>
     <div class="row">
       <label>Interested in<select name="topic" id="topic" required><option value="coaching">Coaching &amp; leadership (a 30-minute call)</option><option value="speaking">Speaking</option><option value="defence">Defence advisory</option><option value="other">Something else</option></select></label>
-      <label>Event date <span class="hint">(speaking only)</span><input type="text" name="event_date" placeholder="e.g. 12 November 2026, Lisbon"></label>
+      <label><span>Event date <span class="hint">(speaking only)</span></span><input type="text" name="event_date" placeholder="e.g. 12 November 2026, Lisbon"></label>
     </div>
     <label>How can I help?<textarea name="message" required></textarea></label>
     <div class="actions"><button class="btn" type="submit">Send message</button></div>
