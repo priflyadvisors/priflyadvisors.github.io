@@ -135,12 +135,25 @@
   /* Ed, 2026-09-15: two signature talks side by side, each marked with its format and length */
   .talks{display:grid;grid-template-columns:1fr 1fr;gap:56px}
   .talk p + p{margin-top:14px}
-  .kit.solo{display:block}
+  .kit.solo{display:block}   /* Ed, 2026-09-15: organiser section without the headshot */
   .cols2.plain{border-top:0}                               /* Ed, 2026-09-15: Defence columns without the rules above and below */
   section.tight .cols2.plain > div{border-bottom:0;padding-top:0;padding-bottom:0}
   /* Ed, 2026-09-15: Defence fits one desktop screen without scrolling */
   section.snug{padding:40px 0 48px}
-  .phead:has(+ section.snug){padding-bottom:36px}   /* Ed, 2026-09-15: organiser section without the headshot */
+  .phead:has(+ section.snug){padding-bottom:36px}
+  /* Ed, 2026-09-15: About — no orphaned "Lisbon", facts as three columns */
+  .nw{white-space:nowrap}
+  @media (max-width:600px){.nw{white-space:normal}}   /* a phone is narrower than "Executive coach, leadership advisor and speaker" */
+  /* (not .creds: that name belongs to the old credentials strip above) */
+  .bio-facts .cred{list-style:none;margin:0;padding:0}
+  .bio-facts .cred li{padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--ink-soft)}
+  .bio-facts h3{margin-bottom:8px}
+  .define .mean.why{font-family:var(--body);font-size:17px;line-height:1.7;max-width:70ch}   /* Ed, 2026-09-15: "Why PriFly?" paragraphs at body size */
+  .define .mean.why p + p{margin-top:12px}
+  .bio-facts .cred ul{list-style:disc;margin:4px 0 0 20px;padding:0}   /* small bullets under an item */
+  .bio-facts .cred li li{border:0;padding:1px 0;font-size:13.5px;color:var(--slate)}
+  .bio-facts .cred .sub{display:block;margin:2px 0 0 14px;font-size:13.5px;color:var(--slate)}   /* degree under the school */
+  @media (max-width:900px){.cols3.bio-facts{grid-template-columns:1fr;gap:36px}}
   .talk{border-top:1px solid var(--ink);padding-top:28px}
   .talk .eyebrow{display:block;margin-bottom:14px}
   .talk h3{font-size:clamp(30px,3vw,40px);line-height:1.08}

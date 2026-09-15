@@ -8,7 +8,7 @@ python3 _build/build_site.py . --live   # live build: rows/slots without photos 
 ```
 
 - `style.css` is hand-maintained (later rules override earlier ones — review notes are marked in comments).
-- Photos: add `images/photo-1.jpg` … `photo-3.jpg` (home photo row) and `images/photo-team.jpg` (Coaching page) to replace placeholders.
+- Photos: descriptive names (`images/ed-chandler-….jpg`), listed in `PHOTOS` (home row) and the `img=` arguments of each page head. Originals live in Ed's `~/Downloads/site-images/picked` (backups in `alternates`). Before adding a photo: resize to 1600px on the long edge in sRGB, strip camera data, add creator/copyright/description with exiftool, and give it alt text that says what it shows.
 - Decisions and locked copy live in the online-presence repo: `copy/priflyadvisors-com.md`.
 - `_build/` starts with an underscore, so GitHub Pages does not publish it.
 - **This branch is not live.** Only `main` is served at PriFlyAdvisors.com. Rebuild with `--live` before merging.

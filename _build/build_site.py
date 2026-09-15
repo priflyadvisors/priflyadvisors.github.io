@@ -67,19 +67,20 @@ def sec(title, inner, band=False, tight=False):
 # Real photos go in images/photo-1.jpg … photo-3.jpg; until then placeholders show in the preview only
 # (pass --live to build without placeholders).
 LIVE = "--live" in sys.argv
-PHOTOS = [("photo-1.jpg", "TOPGUN graduate and instructor"),
-          ("photo-2.jpg", "Leading at NATO and U.S. Navy headquarters in Europe"),
-          ("photo-3.jpg", "Speaker and moderator")]
-def _fig(fname, cap):
+# Photos (Ed, 2026-09-15): descriptive file names, alt text that says what the photo shows; originals in ~/Downloads/site-images/picked
+PHOTOS = [("ed-chandler-f14-tomcat.jpg", "TOPGUN graduate and instructor", "Ed Chandler with an F-14 Tomcat"),
+          ("ed-chandler-naples-vesuvius.jpg", "Leading at NATO and U.S. Navy headquarters in Europe", "Ed Chandler in Naples, Italy, with Mount Vesuvius behind him"),
+          ("ed-chandler-speaking-osac-lisbon.jpg", "Speaker and moderator", "Ed Chandler speaking to an audience at OSAC Lisbon")]
+def _fig(fname, cap, alt):
     if os.path.exists(os.path.join(OUT, "images", fname)):
-        return f'<figure><img src="images/{fname}" alt="{cap}" loading="lazy"><figcaption>{cap}</figcaption></figure>'
+        return f'<figure><img src="images/{fname}" alt="{alt}" loading="lazy"><figcaption>{cap}</figcaption></figure>'
     return None if LIVE else f'<figure><div class="ph" aria-hidden="true">Photo to come</div><figcaption>{cap}</figcaption></figure>'
-_figs = [f for f in (_fig(n, c) for n, c in PHOTOS) if f]
+_figs = [f for f in (_fig(n, c, a) for n, c, a in PHOTOS) if f]
 PHOTO_ROW = f'<section class="photos"><div class="wrap"><div class="photo-row">{"".join(_figs)}</div></div></section>' if _figs else ""
 
 # ---------- HOME ----------
 LD = ('<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"PriFly Advisors","url":"https://priflyadvisors.com/",'
-      '"founder":{"@type":"Person","name":"Ed Chandler","jobTitle":"Executive coach and leadership advisor","sameAs":["https://www.linkedin.com/in/edchandler96/"]},'
+      '"founder":{"@type":"Person","name":"Ed Chandler","jobTitle":"Executive coach and leadership advisor","image":"https://priflyadvisors.com/images/ed-chandler.jpg","sameAs":["https://www.linkedin.com/in/edchandler96/"]},'
       '"areaServed":["Portugal","Europe"],"address":{"@type":"PostalAddress","addressLocality":"Lisbon","addressCountry":"PT"},"email":"ed@priflyadvisors.com",'
       '"description":"Executive coaching and leadership advisory for founders and executives whose companies are growing faster than their leadership. Also speaking and transatlantic defence advisory."}</script>')
 
@@ -183,7 +184,7 @@ STEPS = """
 
 coaching = (phead("Coaching", "Executive Coaching &amp; Leadership Advisory", "Helping leaders lead more, <em>carry less</em>",
                   "Grow your team, extend your reach, reduce the decisions that land on your desk. I help you build the systems to get there, and coach you through the dip, when old habits pull everyone back.",
-                  ("Book a 30-minute call", BOOK), img=("photo-team.jpg", "Ed Chandler working with a leadership team"))
+                  ("Book a 30-minute call", BOOK), img=("ed-chandler-leadership-session-whiteboard.jpg", "Ed Chandler at a whiteboard, leading a session with a leadership team"))
             + sec("Is this you or your organisation?", SIGNS + GROWTH)
             + sec("Why me", WHY, band=True)
             + ('<section class="tight-bottom"><div class="wrap two-col">'
@@ -198,7 +199,7 @@ coaching = (phead("Coaching", "Executive Coaching &amp; Leadership Advisory", "H
 speaking = phead("Speaking", "Keynotes, firesides and panels", "Breaking the barrier: <em>TOPGUN, speed and leadership</em>",
                  "Talks for founders, executives and operators on breaking the invisible leadership barriers that fast growth and high-risk environments create. From main stages to leadership offsites.",
                  ("Check availability for your date", SPEAK),
-                 img=("photo-3.jpg", "Ed Chandler speaking on stage")) + sec("Signature talks", '''<div class="talks">
+                 img=("ed-chandler-presenting-osac-lisbon.jpg", "Ed Chandler presenting at OSAC Lisbon, his slides on the screen beside him")) + sec("Signature talks", '''<div class="talks">
   <div class="talk"><span class="eyebrow">Keynote · 20 to 25 minutes</span>
     <h3>Breaking the Demon</h3>
     <p class="subt">Overcoming hidden leadership barriers</p>
@@ -245,31 +246,52 @@ defence = phead("Defence", "Defence advisory", "Defence support <em>on both side
 </div></section>'''
 
 # ---------- ABOUT ----------
-about = phead("About", "About", "Ed Chandler", "Executive coach, leadership advisor and speaker · Founder of PriFly Advisors · Lisbon") + '''
-<section><div class="wrap about-grid">
+# About (Ed's review, 2026-09-15): two paragraphs in Ed's words; facts become three columns; tighter sections
+about = phead("About", "About", "Ed Chandler",
+              '<span class="nw">Executive coach, leadership advisor and speaker</span> · <span class="nw">Founder of PriFly Advisors · Lisbon</span>') + '''
+<section class="tight"><div class="wrap about-grid">
   <div>
-    <figure class="portrait" style="margin-bottom:32px"><img src="images/ed-chandler.jpg" alt="Ed Chandler" width="650" height="900"></figure>
-    <ul class="facts">
-      <li><span>Service</span><span>U.S. Navy, 28 years · Commander (Ret.)</span></li>
-      <li><span>Flying</span><span>TOPGUN graduate and instructor · ~3,000 hours · 500+ carrier landings</span></li>
-      <li><span>Education</span><span>U.S. Naval Academy · University of Florida MBA</span></li>
-      <li><span>Credentials</span><span>Lean Six Sigma Black Belt · PMP · AgilePM Practitioner</span></li>
-      <li><span>Boards</span><span>Founding Chairman, EU defence startup · Board advisor</span></li>
-      <li><span>Based</span><span>Lisbon, Portugal</span></li>
-    </ul>
+    <figure class="portrait"><img src="images/ed-chandler-navy-career-desk.jpg" alt="Ed Chandler at his desk, with plaques and photos from his Navy career on the wall behind him"></figure>
   </div>
   <div class="prose">
-    <p>I spent 28 years in the U.S. Navy flying fighters, learning from the best as a TOPGUN graduate and training the best as an instructor at the Navy's Strike and Air Warfare Center of Excellence. I helped oversee entire carrier strike groups in the Pacific, helped NATO develop its first Joint Air Power Doctrine in Europe, and led in some of the U.S. military's most complex organisations along the way.</p>
-    <p>My final tours included NATO staff duty at STRIKFORNATO and Executive Officer of Naval Support Activity Naples: two assignments that immersed me in allied operations, transatlantic defence relationships and the institutional machinery that connects American and European security.</p>
-    <p>Now based in Portugal for six years, I help founders and executives build the leadership systems that let organisations perform under pressure, as an executive coach, leadership advisor and speaker. I founded PriFly Advisors to provide strategic and practical advisory across leadership and defence, grounded in the credibility that only comes from decades of operating in high-stakes environments.</p>
+    <p>I spent 28 years in the U.S. Navy flying fighters, learning from the best as a TOPGUN graduate and training the best as an instructor at the Navy's Strike and Air Warfare Center of Excellence. I helped oversee entire carrier strike groups in the Pacific, led a “first in generations” major basing build-out and move in Japan, helped NATO develop its first Joint Air Power Doctrine, and led at some of the U.S. military's most complex organisations along the way.</p>
+    <p>Now based in Portugal, but working globally, I help founders and executives build the leadership systems that let organisations perform under pressure, as an executive coach, leadership advisor and speaker. I founded PriFly Advisors to provide both the strategic and tactical advisory I saw many organisations needed to help them grow while escaping the leadership growth trap rapidly scaling or dynamic companies face — grounded in the credibility that only comes from decades of operating in high-stakes environments.</p>
     <div class="actions" style="margin-top:12px"><a class="btn" href="contact.html">Get in touch →</a><a class="btn ghost" href="https://www.linkedin.com/in/edchandler96/" rel="noopener">LinkedIn</a></div>
   </div>
 </div></section>
-<section class="band tight"><div class="wrap define">
+<section class="band tight"><div class="wrap cols3 bio-facts">
+  <div><h3>Background</h3><ul class="cred">
+    <li>U.S. Naval Aviator<ul><li>~3,000 fighter hours</li><li>500+ carrier-arrested landings</li><li>F-14 / FA-18 / F-16</li></ul></li>
+    <li>Commander (Ret.)</li>
+    <li>TOPGUN graduate &amp; Adversary</li>
+    <li>NSAWC Instructor</li>
+    <li>STRIKFORNATO, Oeiras, Portugal</li>
+    <li>Air Boss, Centennial of Naval Aviation Parade of Flight</li>
+    <li>Air Boss, NAS Oceana, Master Jet Base</li>
+    <li>Executive Officer, Naval Support Activity Naples</li>
+    <li>Founding Chairman, EU defence startup · Board advisor</li>
+  </ul></div>
+  <div><h3>Education</h3><ul class="cred">
+    <li>U.S. Naval Academy<span class="sub">BS Economics</span></li>
+    <li>University of Florida<span class="sub">MBA</span></li>
+    <li>Johns Hopkins University<span class="sub">Certificate in AI Business Strategy</span></li>
+  </ul></div>
+  <div><h3>Credentials</h3><ul class="cred">
+    <li>Lean Six Sigma Black Belt</li>
+    <li>Project Management Professional (PMP)</li>
+    <li>AgilePM Practitioner</li>
+  </ul></div>
+</div></section>
+<section class="tight"><div class="wrap define">
   <div><div class="word">PriFly</div><div class="phon">/ˈpraɪ.flaɪ/</div><div class="src">Naval aviation slang</div>
     <button class="listen" type="button" onclick="document.getElementById('prifly-audio').play()">▶ Listen</button>
     <audio id="prifly-audio" src="https://priflyadvisors.github.io/audio/prifly.mp3" preload="none"></audio></div>
-  <p class="mean">Short for "Primary Flight Control", the tower overseeing carrier flight operations. A place of calm leadership, clarity and control in high-stakes environments.</p>
+  <div class="mean why">
+    <p>Why PriFly? It's U.S. Navy slang for Primary Flight Control, the aircraft carrier's control tower.</p>
+    <p>From there the Air Boss oversees every flight operation in the most hostile aviation environment on earth.</p>
+    <p>Never more than an arm's length away sit representatives from every squadron, ready for any situation, emergency or question. They advise the Boss, back up their teammates in the air and connect them to whatever resources they need. That leadership advisory system is a key to both mission success and flight safety at constant high tempo, and why researchers study it as <em>the</em> model of high reliability.</p>
+    <p>PriFly Advisors brings the same idea to your company: trusted, experienced support right beside the leader, so the whole team can move fast without breaking.</p>
+  </div>
 </div></section>
 '''
 
