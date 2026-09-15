@@ -5,22 +5,22 @@
 <header><div class="wrap"><a class="brand" href="index.html" aria-label="PriFly Advisors, Ed Chandler, Founder: home"><span class="firm-top">PriFly Advisors</span><span class="rulebar"><span class="rule2" aria-hidden="true"></span><img src="images/tomcat.png" alt="" width="39" height="24"></span><span class="founder">Ed Chandler, Founder</span></a><nav aria-label="Main"><ul><li><a href="coaching.html">Coaching</a></li><li><a href="speaking.html">Speaking</a></li><li><a href="defence.html">Defence</a></li><li><a href="about.html">About</a></li><li><a href="contact.html" class="btn-nav" aria-current="page">Contact</a></li></ul></nav></div></header>
 <main>
 <div class="phead"><div class="wrap"><span class="eyebrow">Contact</span><h1>Let's talk</h1><p class="lede">Whether it's a leadership challenge, a speaking engagement or a transatlantic defence question, reach out.</p></div></div>
-<section><div class="wrap split">
+<section class="tight snug contact-form"><div class="wrap split">
   <div class="prose" style="font-size:15px">
     <p><span class="eyebrow">Email</span><br><a href="mailto:ed@priflyadvisors.com">ed@priflyadvisors.com</a></p>
     <p><span class="eyebrow">LinkedIn</span><br><a href="https://www.linkedin.com/in/edchandler96/" rel="noopener">Ed Chandler</a></p>
   </div>
   <form class="form" action="https://formspree.io/f/xeedzodn" method="POST">
     <input type="hidden" name="_subject" value="New enquiry from PriFlyAdvisors.com">
-    <div class="row">
+    <div class="row row3">
       <label>Your name<input type="text" name="name" autocomplete="name" required></label>
       <label>Email<input type="email" name="email" autocomplete="email" required></label>
+      <label>Organisation<input type="text" name="organisation" autocomplete="organization"></label>
     </div>
     <div class="row">
-      <label>Organisation<input type="text" name="organisation" autocomplete="organization"></label>
       <label>Interested in<select name="topic" id="topic" required><option value="coaching">Coaching &amp; leadership (a 30-minute call)</option><option value="speaking">Speaking</option><option value="defence">Defence advisory</option><option value="other">Something else</option></select></label>
+      <label>Event date <span class="hint">(speaking only)</span><input type="text" name="event_date" placeholder="e.g. 12 November 2026, Lisbon"></label>
     </div>
-    <label>Event date <span class="hint">(speaking only)</span><input type="text" name="event_date" placeholder="e.g. 12 November 2026, Lisbon"></label>
     <label>How can I help?<textarea name="message" required></textarea></label>
     <div class="actions"><button class="btn" type="submit">Send message</button></div>
   </form>

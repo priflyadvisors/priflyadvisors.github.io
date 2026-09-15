@@ -141,6 +141,16 @@
   /* Ed, 2026-09-15: Defence fits one desktop screen without scrolling */
   section.snug{padding:40px 0 48px}
   .phead:has(+ section.snug){padding-bottom:36px}
+  /* Ed, 2026-09-15: Contact fits one desktop screen without scrolling */
+  .contact-form .form{gap:14px;max-width:none}
+  .contact-form .form .row{gap:14px}
+  .contact-form .form .row3{grid-template-columns:repeat(3,1fr)}
+  .contact-form .form label{gap:6px}
+  .contact-form .form input,.contact-form .form select{padding:10px 12px}
+  .contact-form .form textarea{min-height:80px;padding:10px 12px}
+  section.snug.contact-form{padding:32px 0 40px}
+  .phead:has(+ section.contact-form){padding-top:56px}
+  @media (max-width:900px){.contact-form .form .row3{grid-template-columns:1fr}}
   /* Ed, 2026-09-15: About — no orphaned "Lisbon", facts as three columns */
   .nw{white-space:nowrap}
   @media (max-width:600px){.nw{white-space:normal}}   /* a phone is narrower than "Executive coach, leadership advisor and speaker" */

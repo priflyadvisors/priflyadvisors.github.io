@@ -297,22 +297,22 @@ about = phead("About", "About", "Ed Chandler",
 
 # ---------- CONTACT ----------
 contact = phead("Contact", "Contact", "Let's talk", "Whether it's a leadership challenge, a speaking engagement or a transatlantic defence question, reach out.") + '''
-<section><div class="wrap split">
+<section class="tight snug contact-form"><div class="wrap split">
   <div class="prose" style="font-size:15px">
     <p><span class="eyebrow">Email</span><br><a href="mailto:ed@priflyadvisors.com">ed@priflyadvisors.com</a></p>
     <p><span class="eyebrow">LinkedIn</span><br><a href="https://www.linkedin.com/in/edchandler96/" rel="noopener">Ed Chandler</a></p>
   </div>
   <form class="form" action="https://formspree.io/f/xeedzodn" method="POST">
     <input type="hidden" name="_subject" value="New enquiry from PriFlyAdvisors.com">
-    <div class="row">
+    <div class="row row3">
       <label>Your name<input type="text" name="name" autocomplete="name" required></label>
       <label>Email<input type="email" name="email" autocomplete="email" required></label>
+      <label>Organisation<input type="text" name="organisation" autocomplete="organization"></label>
     </div>
     <div class="row">
-      <label>Organisation<input type="text" name="organisation" autocomplete="organization"></label>
       <label>Interested in<select name="topic" id="topic" required><option value="coaching">Coaching &amp; leadership (a 30-minute call)</option><option value="speaking">Speaking</option><option value="defence">Defence advisory</option><option value="other">Something else</option></select></label>
+      <label>Event date <span class="hint">(speaking only)</span><input type="text" name="event_date" placeholder="e.g. 12 November 2026, Lisbon"></label>
     </div>
-    <label>Event date <span class="hint">(speaking only)</span><input type="text" name="event_date" placeholder="e.g. 12 November 2026, Lisbon"></label>
     <label>How can I help?<textarea name="message" required></textarea></label>
     <div class="actions"><button class="btn" type="submit">Send message</button></div>
   </form>
