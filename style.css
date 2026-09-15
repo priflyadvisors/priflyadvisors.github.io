@@ -1,0 +1,329 @@
+
+  /* Single visual world: white card stock, navy ink, gold rule — taken from Ed's business card. Light only, painted explicitly. */
+  :root{
+    --paper:#FFFFFF;
+    --mist:#F3F5F8;
+    --ink:#0F2340;
+    --ink-soft:#1E3558;
+    --slate:#56627A;
+    --gold:#B08A3E;
+    --gold-soft:#D9C28F;
+    --line:#E1E5EC;
+    --display:"Newsreader",Georgia,"Times New Roman",serif;
+    --body:"Montserrat","Helvetica Neue",Arial,sans-serif;
+    --mark:Copperplate,"Copperplate Gothic Light","Cinzel",Georgia,serif;
+    --wrap:1120px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;color:var(--ink)}
+  h1 em,h2 em{font-style:italic;color:var(--gold)}
+  p{margin:0}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 40px}
+
+  /* header */
+  header{border-bottom:1px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:10}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:22px;padding-bottom:18px;flex-wrap:wrap}
+  .brand{text-decoration:none;display:grid;gap:6px}
+  .brand .name{font-family:var(--mark);font-size:24px;letter-spacing:.08em;line-height:1;color:var(--ink)}
+  .rule2{display:block;height:4px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);width:100%}
+  /* Never uppercase "PriFly": all caps hides the pronunciation (PRY-fly). */
+  .brand .firm{font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--slate);line-height:1}
+  nav ul{list-style:none;margin:0;padding:0;display:flex;gap:30px;align-items:center;flex-wrap:wrap}
+  nav a{text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.06em;color:var(--slate);padding:6px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  nav a:hover{color:var(--ink)}
+  nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--gold)}
+  nav a.btn-nav{border:1px solid var(--ink);padding:9px 18px;color:var(--ink)}
+  nav a.btn-nav:hover,nav a.btn-nav[aria-current="page"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+  /* shared type */
+  .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .lede{font-size:19px;line-height:1.7;color:var(--ink-soft);max-width:60ch}
+  .muted{color:var(--slate)}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:15px 26px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;transition:background .2s,color .2s}
+  .btn:hover{background:var(--ink-soft)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:var(--mist)}
+  .actions{display:flex;gap:14px;flex-wrap:wrap}
+  section{padding:96px 0}
+  section.tight{padding:64px 0}
+  .band{background:var(--mist)}
+  .sec-head{display:grid;gap:16px;margin-bottom:48px;max-width:720px}
+  .sec-head h2{font-size:clamp(30px,3.4vw,42px);line-height:1.15}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+  /* home hero */
+  .hero{padding:80px 0 72px}
+  .hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:72px;align-items:center}
+  .hero-text{display:grid;gap:26px}
+  .hero h1{font-size:clamp(46px,6.2vw,80px);line-height:1.02;letter-spacing:-.015em}
+  .portrait{margin:0;display:grid;gap:12px}
+  .portrait img{width:100%;aspect-ratio:13/18;object-fit:cover;display:block;background:var(--mist)}
+  .portrait figcaption{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--slate);letter-spacing:.04em;border-top:1px solid var(--gold);padding-top:10px}
+
+  /* credentials strip */
+  .creds{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .creds ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr)}
+  .creds li{padding:28px 24px;display:grid;gap:4px;border-left:1px solid var(--line)}
+  .creds li:first-child{border-left:0;padding-left:0}
+  .creds .num{font-family:var(--display);font-size:38px;line-height:1.1;font-variant-numeric:tabular-nums lining-nums;color:var(--ink)}
+  .creds .lbl{font-size:12px;letter-spacing:.06em;color:var(--slate)}
+
+  /* the index of practices — the one bold move */
+  .index{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+  .index li{border-bottom:1px solid var(--line)}
+  .index a{display:grid;grid-template-columns:220px 1fr auto;gap:40px;align-items:baseline;padding:40px 0;text-decoration:none;position:relative}
+  .index a::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--gold);transition:width .45s ease}
+  .index a:hover::after,.index a:focus-visible::after{width:100%}
+  .index .area{font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);padding-top:10px}
+  .index .big{font-family:var(--display);font-size:clamp(28px,3.4vw,44px);line-height:1.12;color:var(--ink);text-wrap:balance}
+  .index .sub{display:block;font-family:var(--body);font-size:15px;line-height:1.7;color:var(--slate);margin-top:14px;max-width:58ch}
+  .index .go{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);white-space:nowrap;transition:transform .3s}
+  .index a:hover .go{transform:translateX(6px)}
+  .index li:first-child .big{font-size:clamp(32px,4vw,52px)}
+
+  /* thesis */
+  .thesis{display:grid;grid-template-columns:220px 1fr;gap:40px}
+  .thesis blockquote{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(26px,3vw,38px);line-height:1.3;color:var(--ink);max-width:28ch}
+  .thesis cite{display:block;margin-top:22px;font-style:normal;font-family:var(--body);font-size:13px;letter-spacing:.06em;color:var(--slate)}
+
+  /* prifly definition */
+  .define{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start}
+  .define .word{font-family:var(--display);font-size:40px;line-height:1}
+  .define .phon{font-size:14px;color:var(--slate);font-style:italic;margin-top:8px}
+  .define .src{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-top:4px}
+  .define .mean{font-family:var(--display);font-size:22px;line-height:1.55;color:var(--ink-soft);max-width:46ch}
+  .define .listen{margin-top:14px;background:none;border:0;padding:0;font:600 12px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);cursor:pointer}
+
+  /* contact band */
+  .cta .wrap{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+  .cta h2{font-size:clamp(36px,4.4vw,56px);line-height:1.05}
+  .cta p{margin-top:16px}
+
+  /* inner page head */
+  .phead{padding:88px 0 56px;border-bottom:1px solid var(--line)}
+  .phead .wrap{display:grid;gap:22px}
+  .phead h1{font-size:clamp(40px,5.2vw,68px);line-height:1.05;letter-spacing:-.01em;max-width:18ch}
+  .crumb{font-size:12px;color:var(--slate);letter-spacing:.04em}
+  .crumb a{text-decoration:none;border-bottom:1px solid var(--line)}
+
+  /* grids */
+  .cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+  .cols2{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line)}
+  .cols3 h3,.cols2 h3{font-size:25px;line-height:1.25;margin-bottom:10px}
+  .cols3 > div{border-top:1px solid var(--gold);padding-top:20px}
+  .cols2 > div{padding:36px 40px 36px 0;border-bottom:1px solid var(--line)}
+  .cols2 > div:nth-child(even){padding-left:40px;padding-right:0;border-left:1px solid var(--line)}
+  .cols3 p,.cols2 p{color:var(--slate);font-size:15.5px}
+
+  .signs{list-style:none;margin:0;padding:0;display:grid;gap:0;max-width:760px}
+  .signs li{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);font-size:17px;color:var(--ink-soft)}
+  .signs li::before{content:"";width:14px;height:5px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);margin-top:12px}
+
+  .split{display:grid;grid-template-columns:220px 1fr;gap:40px}
+  .prose{display:grid;gap:20px;max-width:64ch;font-size:17px;color:var(--ink-soft)}
+
+  /* talk */
+  .talk{display:grid;grid-template-columns:220px 1fr;gap:40px;border-top:1px solid var(--ink);padding-top:36px}
+  .talk h3{font-size:clamp(32px,3.6vw,46px);line-height:1.08}
+  .talk .subt{font-family:var(--display);font-style:italic;font-size:22px;color:var(--gold);margin:10px 0 22px;line-height:1.35}
+  .talk p{max-width:62ch;color:var(--ink-soft);font-size:17px}
+
+  .dates{width:100%;border-collapse:collapse;font-size:15px}
+  .dates td{padding:18px 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+  .dates td:first-child{width:220px;font-variant-numeric:tabular-nums;color:var(--slate);font-size:13.5px;letter-spacing:.04em}
+  .dates td:last-child{text-align:right;color:var(--slate);font-size:13.5px}
+  .dates strong{font-family:var(--display);font-weight:400;font-size:22px;color:var(--ink)}
+  .table-scroll{overflow-x:auto}
+
+  .kit{display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start}
+  .kit img{width:100%;aspect-ratio:13/18;object-fit:cover;display:block}
+  .kit .bio{font-size:15.5px;color:var(--ink-soft);max-width:66ch;border-left:1px solid var(--gold);padding-left:24px}
+  .kit .meta{margin-top:18px;font-size:12.5px;color:var(--slate);letter-spacing:.03em}
+
+  /* about */
+  .facts{list-style:none;margin:0;padding:0;display:grid;gap:0}
+  .facts li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+  .facts span:first-child{color:var(--slate)}
+  .facts span:last-child{text-align:right}
+  .about-grid{display:grid;grid-template-columns:320px 1fr;gap:72px;align-items:start}
+
+  /* contact form */
+  .form{display:grid;gap:18px;max-width:640px}
+  .form .row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .form label{display:grid;gap:8px;font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--slate)}
+  .form input,.form textarea,.form select{font:400 16px var(--body);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-bottom-color:var(--ink);padding:13px 14px;border-radius:0;letter-spacing:0;text-transform:none}
+  .form input:focus,.form textarea:focus,.form select:focus{outline:none;border-color:var(--gold)}
+  .form textarea{min-height:130px;resize:vertical}
+  .note{font-size:13px;color:var(--slate)}
+
+  footer{border-top:1px solid var(--line);padding:40px 0 48px;margin-top:0}
+  footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  footer .brand .name{font-size:17px}
+  footer ul{list-style:none;margin:0;padding:0;display:flex;gap:24px;flex-wrap:wrap}
+  footer a{text-decoration:none;font-size:13px;color:var(--slate)}
+  footer a:hover{color:var(--ink)}
+  footer small{font-size:12px;color:var(--slate)}
+
+  @media (max-width:900px){
+    .wrap{padding:0 22px}
+    header .wrap{padding-top:16px;padding-bottom:12px}
+    nav ul{gap:18px}
+    .hero{padding:48px 0}
+    .hero .wrap,.cta .wrap,.about-grid,.kit{grid-template-columns:1fr;gap:40px}
+    .portrait{max-width:340px}
+    .creds ul{grid-template-columns:1fr 1fr}
+    .creds li{padding:22px 16px;border-left:0;border-top:1px solid var(--line)}
+    .creds li:nth-child(-n+2){border-top:0}
+    .creds li:nth-child(odd){padding-left:0}
+    .index a,.thesis,.define,.split,.talk{grid-template-columns:1fr;gap:12px}
+    .index a{padding:30px 0}
+    .index .area{padding-top:0}
+    .cols3{grid-template-columns:1fr;gap:32px}
+    .cols2{grid-template-columns:1fr}
+    .cols2 > div,.cols2 > div:nth-child(even){padding:28px 0;border-left:0}
+    .form .row{grid-template-columns:1fr}
+    section{padding:64px 0}
+    .phead{padding:56px 0 40px}
+    .dates td:first-child{width:120px}
+  }
+
+  /* added for the live site */
+  .areas{display:grid;gap:0;border-top:1px solid var(--ink)}
+  .areas > div{display:grid;grid-template-columns:200px 1fr 1fr;gap:32px;padding:22px 0;border-bottom:1px solid var(--line)}
+  .areas h3{font-size:22px;line-height:1.3}
+  .areas p{color:var(--slate);font-size:15.5px}
+  .areas .get{color:var(--ink-soft)}
+  .areas .hd{padding:10px 0;border-bottom:1px solid var(--line)}
+  .areas .hd span{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--slate)}
+  .steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s;border-top:1px solid var(--ink)}
+  .steps > li{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:26px 0;border-bottom:1px solid var(--line);counter-increment:s}
+  .steps > li::before{content:counter(s);font-family:var(--display);font-size:34px;line-height:1;color:var(--gold)}
+  .steps h3{font-size:24px;margin-bottom:6px}
+  .steps .price{font-family:var(--body);font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--gold);margin-left:10px;white-space:nowrap}
+  .steps p,.steps li li{color:var(--ink-soft);font-size:16.5px}
+  .steps ul{margin:10px 0 0;padding-left:18px;display:grid;gap:6px}
+  .notes{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
+  .notes > div{border-top:1px solid var(--gold);padding-top:16px}
+  .notes h3{font-size:21px;margin-bottom:8px}
+  .notes p{color:var(--slate);font-size:15.5px}
+  .form .hint{font-size:12px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--slate)}
+  @media (max-width:900px){.areas > div{grid-template-columns:1fr;gap:6px}.notes{grid-template-columns:1fr;gap:24px}}
+
+  /* ---- Review 1 (2026-09-14): brand lock-up, hero, quote, doors ---- */
+  .brand{gap:7px}
+  .brand .firm-top{font-family:var(--display);font-weight:600;font-size:25px;line-height:1;color:var(--ink);letter-spacing:.005em}
+  .brand .rulebar{display:flex;align-items:center;gap:10px}
+  .brand .rulebar .rule2{flex:1;min-width:120px}
+  .brand .rulebar img{height:24px;width:auto;display:block}
+  .brand .founder{font-size:12px;font-weight:500;letter-spacing:.05em;color:var(--slate);line-height:1}
+  footer .brand .firm-top{font-size:20px}
+  .hero{padding:72px 0 64px}
+  .hero .wrap{grid-template-columns:1.45fr .55fr;gap:64px;align-items:center}
+  .hero h1{font-size:clamp(42px,5.4vw,70px)}
+  .hero .portrait{max-width:300px;justify-self:end;width:100%}
+  .hero .portrait img{aspect-ratio:4/5}
+  .quote-band{background:var(--ink);color:var(--paper);padding:56px 0}
+  .quote-band blockquote{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(28px,3.4vw,44px);line-height:1.2;color:var(--paper);max-width:24ch}
+  .quote-band cite{display:block;margin-top:18px;font-style:normal;font-size:13px;letter-spacing:.06em;color:var(--gold-soft)}
+  .index a{grid-template-columns:minmax(200px,300px) 1fr auto;align-items:center;gap:40px;padding:34px 0}
+  .index .client{font-family:var(--display);font-size:clamp(24px,2.5vw,32px);line-height:1.15;color:var(--ink);text-wrap:balance}
+  .index .desc{font-size:16px;line-height:1.6;color:var(--slate);max-width:48ch}
+  .sec-head h2{font-size:clamp(30px,3.2vw,40px)}
+  @media (max-width:900px){
+    .hero .portrait{justify-self:start;max-width:240px}
+    .index a{grid-template-columns:1fr;gap:8px;padding:26px 0}
+  }
+
+  /* ---- Review 1b: image sizing, tighter brand lock-up, photo row ---- */
+  .portrait img,.kit img{height:auto}                 /* the width/height attributes were fixing the height */
+  .hero .wrap{grid-template-columns:1fr auto;align-items:center}
+  .hero .portrait{width:240px;max-width:240px}         /* 240 × 300: the height of the headline-to-buttons block */
+  .hero .portrait img{aspect-ratio:4/5}
+  .brand{gap:3px}
+  .brand .firm-top{font-size:24px;line-height:1.05}
+  .brand .rulebar{width:290px;gap:8px;height:12px}     /* longer rule; Tomcat sits out to the right without adding height */
+  .brand .rulebar img{height:22px;margin:-5px 0}
+  .brand .founder{line-height:1.1}
+  footer .brand .rulebar{width:250px}
+  .photos{padding:56px 0 8px}
+  .photo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .photo-row figure{margin:0;display:grid;gap:12px}
+  .photo-row img,.photo-row .ph{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  .photo-row .ph{background:var(--mist);border:1px dashed var(--line);display:grid;place-items:center;font-size:12px;letter-spacing:.08em;color:var(--slate)}
+  .photo-row figcaption{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr}
+    .hero .portrait{width:200px}
+    .photo-row{grid-template-columns:1fr}
+    .brand .rulebar{width:220px}
+  }
+
+  /* ---- Coaching fixes: image beside the page headline, confidentiality line ---- */
+  .phead-grid{display:grid;grid-template-columns:1fr 240px;column-gap:64px;align-items:center}
+  .phead-text{display:grid;gap:22px}
+  .phead-img{margin:0}
+  .phead-img img,.phead-img .ph{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+  .phead-img .ph{background:var(--mist);border:1px dashed var(--line);display:grid;place-items:center;font-size:12px;letter-spacing:.08em;color:var(--slate)}
+  .confid{margin-top:28px;font-size:16px;color:var(--ink-soft);max-width:64ch}
+  @media (max-width:900px){.phead-grid{grid-template-columns:1fr;row-gap:28px}.phead-img{max-width:220px}}
+
+  /* ---- Coaching review 1: growth graphic, proof list ---- */
+  .growth{margin:44px 0 0;display:grid;grid-template-columns:300px 1fr;grid-template-areas:"c r" "c f";column-gap:48px;row-gap:18px;align-items:center}
+  .growth canvas{grid-area:c;width:100%;aspect-ratio:1;display:block}
+  .growth-read{grid-area:r;display:flex;gap:44px;align-self:end}
+  .growth-read .n{display:block;font-family:var(--display);font-size:52px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums lining-nums}
+  .growth-read .l{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+  .growth figcaption{grid-area:f;align-self:start;font-size:16px;color:var(--ink-soft);max-width:52ch}
+  .growth figcaption .src{display:block;margin-top:10px;font-size:12px;color:var(--slate)}
+  .proof{margin:0;padding-left:18px;display:grid;gap:8px}
+  .certs{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--gold)}
+  .cta{border-top:1px solid var(--line)}
+  @media (max-width:900px){.growth{grid-template-columns:1fr;grid-template-areas:"c" "r" "f"}.growth canvas{max-width:280px}}
+
+  /* ---- Growth graphic, static (Ed): 10 people | explanation | 20 people ---- */
+  .growth{display:grid;grid-template-columns:220px 1fr 220px;grid-template-areas:none;column-gap:44px;align-items:center;margin:44px 0 0}
+  .g-fig{margin:0;display:grid;gap:10px;justify-items:center}
+  .g-fig svg{width:100%;height:auto;display:block}
+  .g-fig figcaption{font-size:14px;color:var(--ink-soft);text-align:center}
+  .g-fig figcaption strong{color:var(--ink)}
+  .growth .links line{stroke:var(--ink);stroke-opacity:.22;stroke-width:.7}
+  .growth .people circle,.growth .people path{fill:var(--ink)}
+  .growth .people .halo{fill:var(--paper)}
+  .g-text p{font-size:17px;color:var(--ink-soft);text-align:center;max-width:36ch;margin:0 auto}
+  .g-text .src{margin-top:12px;font-size:12px;color:var(--slate)}
+  @media (max-width:900px){.growth{grid-template-columns:1fr 1fr;row-gap:24px}.g-text{grid-column:1 / -1;grid-row:2}}
+
+  /* ---- Growth graphic sizing fix: diagrams were shrinking to a default size ---- */
+  .growth{grid-template-columns:minmax(220px,300px) 1fr minmax(220px,300px)}
+  .g-fig{justify-items:stretch;width:100%}
+  .g-fig svg{width:100%;max-width:300px;margin:0 auto}
+  .g-fig figcaption{text-align:center}
+
+  /* ---- Growth graphic: plain block layout so the diagram takes the column's full width ---- */
+  .g-fig{display:block;width:100%;margin:0}
+  .g-fig svg{display:block;width:100%;max-width:280px;height:auto;margin:0 auto 12px}
+  .growth{align-items:start}
+  .g-text{align-self:center}
+
+  /* ---- Growth graphic: single statement between the diagrams ---- */
+  .g-text .g-big{font-family:var(--display);font-size:clamp(24px,2.4vw,32px);line-height:1.25;color:var(--ink);text-align:center;max-width:18ch;margin:0 auto}
+
+  /* ---- Coaching: wider Why me; What I look at + How we work together side by side ---- */
+  .prose-wide{max-width:none}
+  .two-col{display:grid;grid-template-columns:1fr 1.35fr;gap:64px;align-items:start}
+  .two-col .sec-head{margin-bottom:28px}
+  .asks{max-width:none}
+  .asks li{font-size:17px}
+  @media (max-width:900px){.two-col{grid-template-columns:1fr;gap:48px}}
+
+  /* ---- Two-column section: matching top rule on the questions; tighter gap before the closing ---- */
+  .asks{border-top:1px solid var(--ink)}
+  section.tight-bottom{padding-bottom:40px}
+  section.cta:not(.band){padding:56px 0}
+
+  /* ---- No rule under the last step: the section break already does that job ---- */
+  .steps > li:last-child{border-bottom:0;padding-bottom:0}
