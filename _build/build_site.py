@@ -2,6 +2,11 @@ import sys, os
 OUT = sys.argv[1]
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap">'
 BASE = "https://priflyadvisors.com/"
+# Cloudflare Web Analytics (Ed, 2026-09-17): cookieless, so no consent banner; stats at dash.cloudflare.com
+ANALYTICS = ("<!-- Cloudflare Web Analytics -->"
+             "<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
+             'data-cf-beacon=\'{"token": "6ea406503c794ca2b772edf4d3be9e15"}\'></script>'
+             "<!-- End Cloudflare Web Analytics -->")
 BOOK = "contact.html?topic=coaching"   # → Cal.com once set up
 # Speaking enquiries (Ed, 2026-09-15): a pre-filled email, never a calendar, so Ed answers each date himself
 from urllib.parse import quote
@@ -39,7 +44,7 @@ def page(slug, title, desc, active, body, extra_head=""):
             f'<title>{title}</title><meta name="description" content="{desc}"><link rel="canonical" href="{url}">'
             f'<meta property="og:type" content="website"><meta property="og:url" content="{url}"><meta property="og:title" content="{title}"><meta property="og:description" content="{desc}">'
             f'<meta property="og:image" content="{BASE}images/ed-chandler.jpg"><meta name="twitter:card" content="summary">'
-            f'<link rel="icon" type="image/svg+xml" href="favicon.svg">{FONTS}<link rel="stylesheet" href="style.css">{extra_head}')
+            f'<link rel="icon" type="image/svg+xml" href="favicon.svg">{FONTS}<link rel="stylesheet" href="style.css">{ANALYTICS}{extra_head}')
     return f'<!DOCTYPE html>\n<html lang="en-GB">\n<head>{head}</head>\n<body>\n{header(active)}\n<main>\n{body}\n</main>\n{FOOTER}\n</body>\n</html>\n'
 
 def cta(h, line, btn, href):
@@ -349,4 +354,15 @@ pages = [
 for slug, title, desc, active, body, extra in pages:
     with open(os.path.join(OUT, f"{slug}.html"), "w") as f:
         f.write(page(slug, title, desc, active, body, extra))
+
+# Sitemap and robots (Ed, 2026-09-17): submitted to Google Search Console.
+# No <lastmod> on purpose — a build-time date would churn on every rebuild and tell Google nothing true.
+# Canonical form (extensionless), matching the <link rel="canonical"> in each page head
+locs = "".join(f"<url><loc>{BASE + ('' if slug == 'index' else slug)}</loc></url>" for slug, *_ in pages)
+with open(os.path.join(OUT, "sitemap.xml"), "w") as f:
+    f.write('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + locs + '</urlset>\n')
+with open(os.path.join(OUT, "robots.txt"), "w") as f:
+    f.write(f"User-agent: *\nAllow: /\n\nSitemap: {BASE}sitemap.xml\n")
+
 print("built", [p[0] for p in pages], "| tomcat:", TOMCAT)
