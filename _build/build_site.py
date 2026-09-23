@@ -75,7 +75,8 @@ LIVE = "--live" in sys.argv
 # Photos (Ed, 2026-09-15): descriptive file names, alt text that says what the photo shows; originals in ~/Downloads/site-images/picked
 # AI-look pass (Ed, 2026-09-15): no captions (what they said is in the alt text); files cropped to the agreed frames
 PHOTOS = [("ed-chandler-f14-tomcat.jpg", "Ed Chandler, TOPGUN graduate and instructor, with an F-14 Tomcat"),
-          ("ed-chandler-naples-vesuvius.jpg", "Ed Chandler in Naples, Italy, with Mount Vesuvius behind him, while leading at NATO and U.S. Navy headquarters in Europe"),
+          # Replaced Naples/Vesuvius (Ed, 2026-09-23): mobile testers read the posed stance as too military; this shows him engaged, now, in Lisbon
+          ("ed-chandler-startup-summit-lisbon.jpg", "Ed Chandler listening to a fellow panellist during a fireside session at Startup Summit Lisbon"),
           ("ed-chandler-speaking-osac-lisbon.jpg", "Ed Chandler speaking to an audience at OSAC Lisbon")]
 def _fig(fname, alt):
     if os.path.exists(os.path.join(OUT, "images", fname)):
