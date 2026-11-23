@@ -7,7 +7,7 @@ ANALYTICS = ("<!-- Cloudflare Web Analytics -->"
              "<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
              'data-cf-beacon=\'{"token": "6ea406503c794ca2b772edf4d3be9e15"}\'></script>'
              "<!-- End Cloudflare Web Analytics -->")
-BOOK = "contact.html?topic=coaching"   # → Cal.com once set up
+BOOK = "https://cal.com/prifly"   # Cal.com booking page (Ed, 2026-11-23): free 45-minute conversation
 # Speaking enquiries (Ed, 2026-09-15): a pre-filled email, never a calendar, so Ed answers each date himself
 from urllib.parse import quote
 SPEAK_TO = "ed@priflyadvisors.com"   # → speaking@priflyadvisors.com once that alias exists
@@ -92,7 +92,7 @@ LD = ('<script type="application/ld+json">{"@context":"https://schema.org","@typ
       '"description":"Executive coaching and leadership advisory for founders and executives whose companies are growing faster than their leadership. Also speaking and transatlantic defence advisory."}</script>')
 
 doors = [
-    ("coaching.html", "Founders &amp; executives", "When the company is growing faster than its leadership", "Book a 30-minute call"),
+    ("coaching.html", "Founders &amp; executives", "When the company is growing faster than its leadership", "Book a free 45-minute conversation"),
     ("speaking.html", "Event organisers", "Planning a conference, summit or leadership offsite and need a speaker who holds the room", "Check availability for your date"),
     ("defence.html", "Defence companies", "Contract support and market entry across the Atlantic", "Start a conversation"),   # Ed, 2026-09-15: minimum essential
 ]
@@ -103,7 +103,7 @@ home = f'''
   <div class="hero-text">
     <h1>Leadership that performs <em>as a team</em></h1>
     <p class="lede">When every decision still comes back to you, the company can only move as fast as you can. I help you build a leadership team that makes the right calls without you in the room.</p>
-    <div class="actions"><a class="btn" href="{BOOK}">Book a 30-minute call</a><a class="btn ghost" href="coaching.html">How I work</a></div>
+    <div class="actions"><a class="btn" href="{BOOK}">Book a free 45-minute conversation</a><a class="btn ghost" href="coaching.html">How I work</a></div>
   </div>
   <figure class="portrait"><img src="images/ed-chandler.jpg" alt="Ed Chandler, founder of PriFly Advisors" width="650" height="900"></figure>
 </div></div>
@@ -159,7 +159,7 @@ GROWTH = (
 
 def cta2(h, href):
     return (f'<section class="cta"><div class="wrap"><div><h2>{h}</h2></div><div class="actions">'
-            f'<a class="btn" href="{href}">Book a 30-minute call</a><a class="btn ghost" href="mailto:ed@priflyadvisors.com">Email me</a></div></div></section>')
+            f'<a class="btn" href="{href}">Book a free 45-minute conversation</a><a class="btn ghost" href="mailto:ed@priflyadvisors.com">Email me</a></div></div></section>')
 
 areas = [("Decisions", "Who decides what, and where are decisions stuck?", ""),
          ("Rhythms &amp; rituals", "Do your meetings make decisions, share key information, or just waste time?", ""),
@@ -193,7 +193,7 @@ TRAP = ('<figure class="asks-photo"><img src="images/ed-chandler-500th-trap-trum
 
 STEPS = """
   <ol class="steps">
-    <li><div><h3>A 30-minute call <span class="price">Free</span></h3><p>Tell me where the pressure is showing, and we'll work out together whether I can help.</p></div></li>
+    <li><div><h3>A 45-minute conversation <span class="price">Free</span></h3><p>Tell me where the pressure is showing, and we'll work out together whether I can help.</p></div></li>
     <li><div><h3>The Leadership Analysis <span class="price">From €4,500 + IVA</span></h3><p>Three weeks: I meet with you, interview up to six of your leaders in confidence and sit in on one or more leadership meetings. You get:</p>
       <ul><li>The area most in need of attention</li><li>The three changes to make first</li><li>A 90-day plan, with two coaching sessions to get it moving</li></ul>
       <p>Yours to keep, whether or not we continue. If you do, €1,000 of the fee counts toward coaching.</p></div></li>
@@ -202,7 +202,7 @@ STEPS = """
 
 coaching = (phead("Coaching", "Executive Coaching &amp; Leadership Advisory", "Helping leaders lead more, <em>carry less</em>",
                   "Grow your team, extend your reach, reduce the decisions that land on your desk. I help you build the systems to get there, and coach you through the dip, when old habits pull everyone back.",
-                  ("Book a 30-minute call", BOOK), img=("ed-chandler-leadership-session-whiteboard.jpg", "Ed Chandler at a whiteboard, leading a session with a leadership team"))
+                  ("Book a free 45-minute conversation", BOOK), img=("ed-chandler-leadership-session-whiteboard.jpg", "Ed Chandler at a whiteboard, leading a session with a leadership team"))
             + sec("Is this you or your organisation?", SIGNS + GROWTH)
             + WHY_SECTION
             + ('<section class="tight-bottom"><div class="wrap two-col">'
@@ -329,7 +329,7 @@ contact = phead("Contact", "Contact", "Let's talk", "Whether it's a leadership c
       <label>Organisation<input type="text" name="organisation" autocomplete="organization"></label>
     </div>
     <div class="row">
-      <label>Interested in<select name="topic" id="topic" required><option value="coaching">Coaching &amp; leadership (a 30-minute call)</option><option value="speaking">Speaking</option><option value="defence">Defence advisory</option><option value="other">Something else</option></select></label>
+      <label>Interested in<select name="topic" id="topic" required><option value="coaching">Coaching &amp; leadership</option><option value="speaking">Speaking</option><option value="defence">Defence advisory</option><option value="other">Something else</option></select></label>
       <label><span>Event date <span class="hint">(speaking only)</span></span><input type="text" name="event_date" placeholder="e.g. 12 November 2026, Lisbon"></label>
     </div>
     <label>How can I help?<textarea name="message" required></textarea></label>
@@ -343,7 +343,7 @@ pages = [
     ("index", "PriFly Advisors · Ed Chandler | Executive Coaching &amp; Leadership Advisory, Lisbon",
      "Executive coaching and leadership advisory for founders and executives whose companies are growing faster than their leadership. Ed Chandler, former TOPGUN instructor, based in Lisbon.", "home", home, LD),
     ("coaching", "Executive Coaching &amp; Leadership Advisory | PriFly Advisors",
-     "Helping leaders lead more, carry less: a leadership system that changes with your company, and coaching for the leaders who run it. Executive coaching and leadership advisory in Lisbon, Portugal and Europe: a 30-minute call, the Leadership Analysis, then coaching.", "coaching", coaching, ""),
+     "Helping leaders lead more, carry less: a leadership system that changes with your company, and coaching for the leaders who run it. Executive coaching and leadership advisory in Lisbon, Portugal and Europe: a free 45-minute conversation, the Leadership Analysis, then coaching.", "coaching", coaching, ""),
     ("speaking", "Speaking | Ed Chandler, PriFly Advisors",
      "TOPGUN-inspired keynotes, firesides, working sessions and panel moderation on crisis judgement and leadership under pressure.", "speaking", speaking, ""),
     ("defence", "Defence Advisory | PriFly Advisors",
